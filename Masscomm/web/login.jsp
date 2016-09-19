@@ -18,17 +18,17 @@
     </head>
     <body>
         <div id="login_container" class="container">
-            <form class="form-horizontal">
+            <form class="form-horizontal" name="login" id="flogin" action="autenticacion" method="post">
                 <div class="form-group">
                     <label for="inputUser" class="col-sm-4 control-label">Usuario</label>
                     <div class="col-sm-5">
-                        <input type="email" class="form-control" id="inputEmail3" placeholder="Nombre de usuario">
+                        <input type="text" class="form-control" name="usr" id="usr" placeholder="Nombre de usuario">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword" class="col-sm-4 control-label">Contraseña</label>
                     <div class="col-sm-5">
-                        <input type="password" class="form-control" id="inputPassword3" placeholder="Contraseña">
+                        <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Contraseña">
                     </div>
                 </div>
                 <div class="form-group">
