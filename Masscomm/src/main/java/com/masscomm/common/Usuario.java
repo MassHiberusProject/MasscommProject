@@ -48,5 +48,4 @@ public class Usuario implements java.io.Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }
