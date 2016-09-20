@@ -5,33 +5,42 @@
  */
 package Servlet;
 
-import com.masscomm.common.Usuario;
-import com.masscomm.persistence.HibernateUtil;
+import com.masscomm.common.ManageUsuario;
 import java.io.IOException;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 
 /**
  *
  * @author claencina
  */
-public class autenticacion extends HttpServlet {
+public class Autenticacion extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-
         String usuario = request.getParameter("usr");
         String contrasenia = request.getParameter("pwd");
 
         String contraseniaEncriptada = DigestUtils.shaHex(contrasenia);
+
+        List ok = ManageUsuario.comprueba(usuario, contraseniaEncriptada);
+        if (!ok.isEmpty()) {
+            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect("login.jsp");
+        }
     }
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    }
 }
