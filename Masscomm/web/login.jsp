@@ -14,6 +14,7 @@
         <meta name="author" content="Hiberus Osaba">
         <link rel="stylesheet" type="text/css" href="CSS/custom.css">
         <link rel="stylesheet" href="CSS/bootstrap.min.css" type="text/css"/>
+        <script src="JS/jquery-1.12.4.min.js"></script>
         <script src="JS/bootstrap.min.js"></script>
     </head>
     <body>
@@ -22,13 +23,13 @@
                 <div class="form-group">
                     <label for="inputUser" class="col-sm-4 control-label">Usuario</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" name="usr" id="usr" placeholder="Nombre de usuario">
+                        <input type="text" class="form-control" name="usr" id="usr" placeholder="Nombre de usuario" required="true">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword" class="col-sm-4 control-label">Contraseña</label>
                     <div class="col-sm-5">
-                        <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Contraseña">
+                        <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Contraseña" required="true">
                     </div>
                 </div>
                 <div class="form-group">

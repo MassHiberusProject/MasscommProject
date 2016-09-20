@@ -5,7 +5,6 @@
  */
 package com.masscomm.common;
 
-import com.masscomm.common.Usuario;
 import com.masscomm.persistence.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +18,7 @@ import org.hibernate.Transaction;
  */
 public class ManageUsuario {
 
-    private static int save(Usuario user) {
+    public static int save(Usuario user) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
@@ -38,7 +37,8 @@ public class ManageUsuario {
         }
         return ok;
     }
-    private static Object update(Usuario user) {
+
+    public static Object update(Usuario user) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
@@ -57,7 +57,8 @@ public class ManageUsuario {
         }
         return ok;
     }
-    private static void delete(Usuario user) {
+
+    public static void delete(Usuario user) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
@@ -74,7 +75,8 @@ public class ManageUsuario {
             sess.close();
         }
     }
-    private static List list() {
+
+    public static List list() {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
@@ -93,14 +95,15 @@ public class ManageUsuario {
         }
         return users;
     }
-    private static Usuario read(int id) {
+
+    public static Usuario read(int id) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
         Usuario user = new Usuario();
         try {
             tx = sess.beginTransaction();
-            user = sess.get(Usuario.class, id);
+            user = (Usuario) sess.get(Usuario.class, id);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -111,5 +114,32 @@ public class ManageUsuario {
             sess.close();
         }
         return user;
+    }
+
+    public static List comprueba(String usr, String pwd) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = null;
+        List users = new ArrayList();
+        try {
+            tx = sess.beginTransaction();
+            
+            String consulta = "SELECT U.id FROM Usuario U WHERE U.user = :user_name AND U.password = :user_pass";
+            
+            users = sess.createQuery(consulta)
+                    .setParameter("user_name", usr)
+                    .setParameter("user_pass", pwd)
+                    .list();
+            
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            throw e;
+        } finally {
+            sess.close();
+        }
+        return users;
     }
 }
