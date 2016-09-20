@@ -18,19 +18,19 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Autenticacion</servlet-name>
-        <url-pattern>/autenticacion</url-pattern>
+        <url-pattern>/Autenticacion</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AnadirUsuario</servlet-name>
-        <url-pattern>/admin/anadirUsuario</url-pattern>
+        <url-pattern>/admin/AnadirUsuario</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ListaUsuarios</servlet-name>
-        <url-pattern>/admin/listaUsuarios</url-pattern>
+        <url-pattern>/admin/ListaUsuarios</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EliminarUsuario</servlet-name>
-        <url-pattern>/admin/eliminarUsuario</url-pattern>
+        <url-pattern>/admin/EliminarUsuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

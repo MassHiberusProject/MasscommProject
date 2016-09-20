@@ -29,7 +29,7 @@
                 <c:forEach var="usuario" items="${users}">
                     <tr>
                         <td>
-                            <a href="<c:url value="eliminarUsuario"><c:param name="id" value="${usuario.id}"/></c:url>" >
+                            <a href="<c:url value="EliminarUsuario"><c:param name="id" value="${usuario.id}"/></c:url>" >
                                 <span class="glyphicon glyphicon-remove"></span> Eliminar
                             </a>
                         </td>

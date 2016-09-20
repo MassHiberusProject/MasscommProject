@@ -8,7 +8,6 @@ package Servlet;
 import com.masscomm.common.ManageUsuario;
 import com.masscomm.common.Usuario;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -31,15 +30,15 @@ public class EliminarUsuario extends HttpServlet {
             idUser = Integer.parseInt(id);
         } catch (Exception e) {
             //Mensaje error
-            response.sendRedirect("listaUsuarios");
+            response.sendRedirect("ListaUsuarios");
             return;
         }
         Usuario user = ManageUsuario.read(idUser);
-        if(!user.getUser().isEmpty()){
+        if (user!=null) {
             ManageUsuario.delete(user);
-        }else{
-           //Mensaje error
+        } else {
+            //Mensaje error
         }
-        response.sendRedirect("listaUsuarios");
+        response.sendRedirect("ListaUsuarios");
     }
 }

@@ -26,7 +26,7 @@
         </div>
         <div class="row">
             <div id="login_container" class="container">
-                <form class="form-horizontal" name="login" id="flogin" action="anadirUsuario" method="post">
+                <form class="form-horizontal" name="login" id="flogin" action="AnadirUsuario" method="post">
                     <div class="form-group">
                         <label for="inputUser" class="col-sm-4 control-label">Usuario *</label>
                         <div class="col-sm-5">
