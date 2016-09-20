@@ -31,7 +31,6 @@ public class ManageUsuario {
             if (tx != null) {
                 tx.rollback();
             }
-            throw e;
         } finally {
             sess.close();
         }
@@ -51,7 +50,6 @@ public class ManageUsuario {
             if (tx != null) {
                 tx.rollback();
             }
-            throw e;
         } finally {
             sess.close();
         }
@@ -70,7 +68,6 @@ public class ManageUsuario {
             if (tx != null) {
                 tx.rollback();
             }
-            throw e;
         } finally {
             sess.close();
         }
@@ -89,7 +86,6 @@ public class ManageUsuario {
             if (tx != null) {
                 tx.rollback();
             }
-            throw e;
         } finally {
             sess.close();
         }
@@ -109,7 +105,6 @@ public class ManageUsuario {
             if (tx != null) {
                 tx.rollback();
             }
-            throw e;
         } finally {
             sess.close();
         }
@@ -136,7 +131,6 @@ public class ManageUsuario {
             if (tx != null) {
                 tx.rollback();
             }
-            throw e;
         } finally {
             sess.close();
         }

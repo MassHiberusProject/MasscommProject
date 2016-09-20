@@ -8,6 +8,6 @@ and open the template in the editor.
     Author     : pmayor
 */
 
-#login_container{
+#login_container, #listaUsuarios{
     margin-top: 10%;
 }

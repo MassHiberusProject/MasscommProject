@@ -38,9 +38,4 @@ public class Autenticacion extends HttpServlet {
             response.sendRedirect("login.jsp");
         }
     }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-    }
 }

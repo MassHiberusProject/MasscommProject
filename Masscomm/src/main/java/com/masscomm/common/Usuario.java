@@ -23,6 +23,8 @@ public class Usuario implements java.io.Serializable {
     }
 
     public Usuario() {
+        this.user="";
+        this.password="";
     }
 
     public Integer getId() {

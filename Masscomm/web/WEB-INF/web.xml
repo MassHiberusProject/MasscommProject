@@ -4,9 +4,33 @@
         <servlet-name>Autenticacion</servlet-name>
         <servlet-class>Servlet.Autenticacion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AnadirUsuario</servlet-name>
+        <servlet-class>Servlet.AnadirUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListaUsuarios</servlet-name>
+        <servlet-class>Servlet.ListaUsuarios</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarUsuario</servlet-name>
+        <servlet-class>Servlet.EliminarUsuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Autenticacion</servlet-name>
         <url-pattern>/autenticacion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AnadirUsuario</servlet-name>
+        <url-pattern>/admin/anadirUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListaUsuarios</servlet-name>
+        <url-pattern>/admin/listaUsuarios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarUsuario</servlet-name>
+        <url-pattern>/admin/eliminarUsuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
