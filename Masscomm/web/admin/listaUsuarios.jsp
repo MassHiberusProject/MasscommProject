@@ -25,6 +25,8 @@
                 <tr>
                     <th class="col-sm-3">&nbsp;</th>
                     <th>Nombre de usuario</th>
+                    <th>Correo electrónico</th>
+                    <th>Rol</th>
                 </tr>
                 <c:forEach var="usuario" items="${users}">
                     <tr>
@@ -34,6 +36,8 @@
                             </a>
                         </td>
                         <td>${usuario.user}</td>
+                        <td>${usuario.email}</td>
+                        <td>${usuario.rol}</td>
                     </tr>
                 </c:forEach>
             </table>

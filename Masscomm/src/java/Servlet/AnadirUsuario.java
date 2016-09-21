@@ -21,18 +21,18 @@ import org.apache.commons.codec.digest.DigestUtils;
  */
 public class AnadirUsuario extends HttpServlet {
 
-
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String usuario = request.getParameter("usr");
         String contrasenia = request.getParameter("pwd");
+        String mail = request.getParameter("mail");
+        String rol = request.getParameter("rol");
 
         String contraseniaEncriptada = DigestUtils.shaHex(contrasenia);
         
-        Usuario user = new Usuario(usuario, contraseniaEncriptada);
+        Usuario user = new Usuario(usuario, contraseniaEncriptada, mail, rol);
         int ok = ManageUsuario.save(user);
         if(ok != -1){
             response.sendRedirect("../index.jsp");
@@ -40,5 +40,13 @@ public class AnadirUsuario extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("anadirUsuario.jsp");
             rd.forward(request, response);
         }
+    }
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        //Comprobar rol
+        RequestDispatcher rd = request.getRequestDispatcher("anadirUsuario.jsp");
+        rd.forward(request, response);
     }
 }

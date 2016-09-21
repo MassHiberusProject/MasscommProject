@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -19,11 +20,16 @@
     </head>
     <body>
         <div id="login_container" class="container">
+            <c:if test="${error}">
+                <div class="alert alert-danger" role="alert">
+                    <p><c:out value="${error}"/></p>
+                </div>
+            </c:if>
             <form class="form-horizontal" name="login" id="flogin" action="Autenticacion" method="post">
                 <div class="form-group">
                     <label for="inputUser" class="col-sm-4 control-label">Usuario</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" name="usr" id="usr" placeholder="Nombre de usuario" required="true">
+                        <input type="text" class="form-control" name="usr" id="usr" placeholder="Nombre de usuario" required="true" autofocus="true">
                     </div>
                 </div>
                 <div class="form-group">

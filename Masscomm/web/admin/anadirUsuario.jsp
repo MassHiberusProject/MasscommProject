@@ -40,9 +40,22 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="inputEmail" class="col-sm-4 control-label">Correo electrónico *</label>
+                        <div class="col-sm-5">
+                            <input type="email" class="form-control" name="mail" id="mail" placeholder="Correo electrónico" required="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputRol" class="col-sm-4 control-label">Rol *</label>
+                        <div class="col-sm-5">
+                            <label class="radio-inline"><input type="radio" name="rol" id="rol1" checked="true" value="usuario">Usuario</label>
+                            <label class="radio-inline"><input type="radio" name="rol" id="rol2" value="administrador">Administrador</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-5">
                             <button type="submit" class="btn btn-primary">Añadir usuario</button>
-                            <a href="listaUsuarios" class="btn btn-primary" role="button">Cancelar</a>
+                            <a href="ListaUsuarios" class="btn btn-primary" role="button">Cancelar</a>
                         </div>
                     </div>
                 </form>

@@ -16,6 +16,10 @@
         <servlet-name>EliminarUsuario</servlet-name>
         <servlet-class>Servlet.EliminarUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CerrarSesion</servlet-name>
+        <servlet-class>Servlet.CerrarSesion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Autenticacion</servlet-name>
         <url-pattern>/Autenticacion</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>EliminarUsuario</servlet-name>
         <url-pattern>/admin/EliminarUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CerrarSesion</servlet-name>
+        <url-pattern>/CerrarSesion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

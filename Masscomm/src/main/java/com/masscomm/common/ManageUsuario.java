@@ -136,4 +136,28 @@ public class ManageUsuario {
         }
         return users;
     }
+    public static List getRol(String usr) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = null;
+        List users = new ArrayList();
+        try {
+            tx = sess.beginTransaction();
+            
+            String consulta = "SELECT U.rol FROM Usuario U WHERE U.user = :user_name";
+            
+            users = sess.createQuery(consulta)
+                    .setParameter("user_name", usr)
+                    .list();
+            
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            sess.close();
+        }
+        return users;
+    }
 }
