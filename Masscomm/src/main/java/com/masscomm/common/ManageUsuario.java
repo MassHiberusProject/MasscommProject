@@ -18,7 +18,7 @@ import org.hibernate.Transaction;
  */
 public class ManageUsuario {
 
-    private static int save(Usuario user) {
+    public static int save(Usuario user, String rol) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
@@ -26,6 +26,11 @@ public class ManageUsuario {
         try {
             tx = sess.beginTransaction();
             ok = (Integer) sess.save(user);
+            String sql = "INSERT INTO RolesUsuarios(:user_name, :rol)";
+            ok = sess.createQuery(sql)
+                    .setParameter("user_name", user.getUsername())
+                    .setParameter("rol", rol)
+                    .executeUpdate();
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -37,7 +42,8 @@ public class ManageUsuario {
         }
         return ok;
     }
-    private static Object update(Usuario user) {
+
+    public static Object update(Usuario user) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
@@ -56,7 +62,8 @@ public class ManageUsuario {
         }
         return ok;
     }
-    private static void delete(Usuario user) {
+
+    public static void delete(Usuario user) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
@@ -73,7 +80,8 @@ public class ManageUsuario {
             sess.close();
         }
     }
-    private static List list() {
+
+    public static List list() {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
@@ -92,14 +100,15 @@ public class ManageUsuario {
         }
         return users;
     }
-    private static Usuario read(int id) {
+
+    public static Usuario read(String username) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
         Usuario user = new Usuario();
         try {
             tx = sess.beginTransaction();
-            user = (Usuario) sess.get(Usuario.class, id);
+            user = (Usuario) sess.get(Usuario.class, username);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -110,5 +119,30 @@ public class ManageUsuario {
             sess.close();
         }
         return user;
+    }
+
+    public static List getRol(String usr) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = null;
+        List users = new ArrayList();
+        try {
+            tx = sess.beginTransaction();
+
+            String consulta = "SELECT U.rol FROM RolesUsuarios U WHERE U.username = :user_name";
+
+            users = sess.createQuery(consulta)
+                    .setParameter("user_name", usr)
+                    .list();
+
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            sess.close();
+        }
+        return users;
     }
 }

@@ -9,6 +9,6 @@
    <property name="hibernate.connection.url">jdbc:mysql://192.168.21.5:3306/masscomm</property>
    <property name="hibernate.connection.username">root</property>
    <property name="hibernate.connection.password">password</property>
-   <mapping resource="com/mkyong/common/Usuario.hbm.xml"></mapping>
+   <mapping resource="com/masscomm/common/Usuario.hbm.xml"></mapping>
 </session-factory>
 </hibernate-configuration>

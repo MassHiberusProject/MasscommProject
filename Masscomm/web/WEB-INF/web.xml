@@ -1,5 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>AnadirUsuario</servlet-name>
+        <servlet-class>Servlet.AnadirUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ListaUsuarios</servlet-name>
+        <servlet-class>Servlet.ListaUsuarios</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarUsuario</servlet-name>
+        <servlet-class>Servlet.EliminarUsuario</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CerrarSesion</servlet-name>
+        <servlet-class>Servlet.CerrarSesion</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AnadirUsuario</servlet-name>
+        <url-pattern>/admin/AnadirUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListaUsuarios</servlet-name>
+        <url-pattern>/admin/ListaUsuarios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarUsuario</servlet-name>
+        <url-pattern>/admin/EliminarUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CerrarSesion</servlet-name>
+        <url-pattern>/CerrarSesion</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30
