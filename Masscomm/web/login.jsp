@@ -20,8 +20,8 @@
     </head>
     <body>
         <div id="login_container" class="container">
-            <c:if test="${error}">
-                <div class="alert alert-danger" role="alert">
+            <c:if test="${error !=null}">
+                <div class="alert alert-danger col-sm-offset-3 col-sm-6" role="alert">
                     <p><c:out value="${error}"/></p>
                 </div>
             </c:if>
@@ -40,11 +40,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-5">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox"> Recordar los datos
-                            </label>
-                        </div>
+                        <a href="#">He olvidado mi contraseña</a>
                     </div>
                 </div>
                 <div class="form-group">

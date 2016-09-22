@@ -63,32 +63,6 @@ public class Autenticacion extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        HttpSession sesion = request.getSession(false);
-        if (sesion == null) {
-            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-            rd.forward(request, response);
-        } else {
-            String user = (String) sesion.getAttribute("user");
-            if (user == null) {
-                RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-                rd.forward(request, response);
-            } else {
-                List rol = ManageUsuario.getRol(user);
-                if (!rol.isEmpty()) {
-                    String role = (String) rol.get(0);
-                    if (role.compareTo("usuario") == 0) {
-                        response.sendRedirect("index.jsp");
-                    } else if (role.compareTo("administrador") == 0) {
-                        response.sendRedirect("admin/ListaUsuarios");
-                    } else {
-                        RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-                        rd.forward(request, response);
-                    }
-                } else {
-                    RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
-                    rd.forward(request, response);
-                }
-            }
-        }
+        ComprobarSesion.comprueba(request, response);
     }
 }

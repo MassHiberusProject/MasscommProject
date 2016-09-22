@@ -13,6 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
@@ -32,10 +33,36 @@ public class Autenticacion extends HttpServlet {
 
         List ok = ManageUsuario.comprueba(usuario, contraseniaEncriptada);
         if (!ok.isEmpty()) {
-            RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-            rd.forward(request, response);
+            List rol = ManageUsuario.getRol(usuario);
+            if (!rol.isEmpty()) {
+                HttpSession sesion = request.getSession(true);
+                sesion.setAttribute("user", usuario);
+                String role = (String) rol.get(0);
+                if (role.compareTo("usuario") == 0) {
+                    response.sendRedirect("index.jsp");
+                } else if (role.compareTo("administrador") == 0) {
+                    response.sendRedirect("admin/ListaUsuarios");
+                } else {
+                    request.setAttribute("error", "No tiene acceso a la aplicación. Contacte con el administrador");
+                    RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                    rd.forward(request, response);
+                }
+            } else {
+                request.setAttribute("error", "No tiene acceso a la aplicación. Contacte con el administrador");
+                RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+                rd.forward(request, response);
+            }
         } else {
-            response.sendRedirect("login.jsp");
+            request.setAttribute("error", "El nombre de usuario o la contraseña es incorrecto");
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        ComprobarSesion.comprueba(request, response);
     }
 }

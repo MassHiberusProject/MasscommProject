@@ -6,8 +6,6 @@
 package Servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,10 +23,10 @@ public class CerrarSesion extends HttpServlet {
             throws ServletException, IOException {
         HttpSession sesion = request.getSession(false);
         if (sesion == null) {
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("Autenticacion");
         } else {
             sesion.invalidate();
-            response.sendRedirect("index.jsp");
+            response.sendRedirect("Autenticacion");
         }
     }
 
