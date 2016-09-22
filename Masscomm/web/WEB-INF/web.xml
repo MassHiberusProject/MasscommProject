@@ -4,9 +4,33 @@
         <servlet-name>autenticacion</servlet-name>
         <servlet-class>autenticacion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Cumpleanios</servlet-name>
+        <servlet-class>Servlet.Cumpleanios</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarCumpleanios</servlet-name>
+        <servlet-class>Servlet.EliminarCumpleanios</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditarCumpleanios</servlet-name>
+        <servlet-class>Servlet.EditarCumpleanios</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>autenticacion</servlet-name>
         <url-pattern>/autenticacion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Cumpleanios</servlet-name>
+        <url-pattern>/Cumpleanios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarCumpleanios</servlet-name>
+        <url-pattern>/EliminarCumpleanios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarCumpleanios</servlet-name>
+        <url-pattern>/EditarCumpleanios</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
