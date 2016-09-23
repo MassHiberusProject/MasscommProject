@@ -24,35 +24,45 @@
         <%@include file="navbar.html" %>
         <div class="row">
             <div class="col-sm-offset-1 col-sm-5">
-                <h3>Añadir nuevos usuarios</h3>
+                <h4>Añadir nuevos usuarios</h4>
             </div>
         </div>
-        <c:if test="${error !=null}">
-            <div class="row">
-                <div class="alert alert-danger col-sm-offset-2 col-sm-8" role="alert">
-                    <p><c:out value="${error}"/></p>
-                </div>
-            </div>
-        </c:if>
         <div class="row">
             <div id="login_container" class="container">
+                <c:if test="${errorpwd !=null || errormail !=null}">
+                    <div class="row">
+                        <div class="alert alert-danger col-sm-offset-3 col-sm-6" role="alert">
+                            <ul>
+                                <c:if test="${errorpwd !=null}">
+                                    <li><c:out value="${errorpwd}"/></li>
+                                </c:if>
+                                <c:if test="${errormail !=null}">
+                                    <li><c:out value="${errormail}"/></li>
+                                </c:if>
+                            </ul>
+                        </div>
+                    </div>
+                </c:if>
                 <form class="form-horizontal" name="login" id="flogin" action="AnadirUsuario" method="post">
                     <div class="form-group">
                         <label for="inputUser" class="col-sm-4 control-label">Usuario *</label>
                         <div class="col-sm-5">
-                            <input type="text" class="form-control" name="usr" id="usr" placeholder="Nombre de usuario" required="true">
+                            <input type="text" class="form-control" name="usr" id="usr" placeholder="Nombre de usuario" required="true" autofocus="true" value="<c:out value="${usr}"/>">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputPassword" class="col-sm-4 control-label">Contraseña *</label>
                         <div class="col-sm-5">
-                            <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Contraseña" required="true">
+                            <input type="password" class="form-control" name="pwd" id="pwd" placeholder="Contraseña" required="true" value="<c:out value="${pwd}"/>">
+                        </div>
+                        <div class="row">
+                            <p class="text-info col-sm-offset-4 col-sm-5">La clave debe tener una longitud mayor de 8 y contener letras (al menos una mayúscula y una minúscula) y números</p>
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputEmail" class="col-sm-4 control-label">Correo electrónico *</label>
                         <div class="col-sm-5">
-                            <input type="email" class="form-control" name="mail" id="mail" placeholder="Correo electrónico" required="true">
+                            <input type="email" class="form-control" name="mail" id="mail" placeholder="Correo electrónico" required="true" value="<c:out value="${mail}"/>">
                         </div>
                     </div>
                     <div class="form-group">
