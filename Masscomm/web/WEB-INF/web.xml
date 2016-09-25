@@ -16,6 +16,14 @@
         <servlet-name>CerrarSesion</servlet-name>
         <servlet-class>Servlet.CerrarSesion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Inicio</servlet-name>
+        <servlet-class>Servlet.Inicio</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfigurarCuenta</servlet-name>
+        <servlet-class>Servlet.ConfigurarCuenta</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AnadirUsuario</servlet-name>
         <url-pattern>/admin/AnadirUsuario</url-pattern>
@@ -32,13 +40,19 @@
         <servlet-name>CerrarSesion</servlet-name>
         <url-pattern>/CerrarSesion</url-pattern>
     </servlet-mapping>
-
+    <servlet-mapping>
+        <servlet-name>Inicio</servlet-name>
+        <url-pattern>/usuario/Inicio</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfigurarCuenta</servlet-name>
+        <url-pattern>/usuario/ConfigurarCuenta</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Area de administracion</web-resource-name>

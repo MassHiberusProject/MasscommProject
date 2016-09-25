@@ -125,13 +125,13 @@ public class ManageUsuario {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
-        List users = new ArrayList();
+        List rols = new ArrayList();
         try {
             tx = sess.beginTransaction();
 
             String consulta = "SELECT U.rol FROM RolesUsuarios U WHERE U.username = :user_name";
 
-            users = sess.createQuery(consulta)
+            rols = sess.createQuery(consulta)
                     .setParameter("user_name", usr)
                     .list();
 
@@ -143,6 +143,6 @@ public class ManageUsuario {
         } finally {
             sess.close();
         }
-        return users;
+        return rols;
     }
 }
