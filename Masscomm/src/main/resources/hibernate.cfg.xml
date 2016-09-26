@@ -10,5 +10,6 @@
    <property name="hibernate.connection.username">root</property>
    <property name="hibernate.connection.password">password</property>
    <mapping resource="com/masscomm/common/Usuario.hbm.xml"></mapping>
+   <mapping resource="com/masscomm/common/RolesUsuarios.hbm.xml"></mapping>
 </session-factory>
 </hibernate-configuration>

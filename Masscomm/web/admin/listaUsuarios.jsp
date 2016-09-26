@@ -15,13 +15,18 @@
         <meta name="author" content="Hiberus Osaba">
 
         <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-        <link href="${ctx}/CSS/custom.css" rel="stylesheet" media="all" type="text/css">
+        <link href="${ctx}/CSS/customAdmin.css" rel="stylesheet" media="all" type="text/css">
         <link href="${ctx}/CSS/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
         <script src="${ctx}/JS/jquery-1.12.4.min.js"></script>
         <script src="${ctx}/JS/bootstrap.min.js"></script>
     </head>
     <body>
         <%@include file="navbar.html" %>
+        <div class="row">
+            <div class="col-sm-offset-1 col-sm-5">
+                <h4>Lista de usuarios</h4>
+            </div>
+        </div>
         <c:if test="${error !=null}">
             <div class="alert alert-danger col-sm-offset-2 col-sm-8" role="alert">
                 <p><c:out value="${error}"/></p>
@@ -42,7 +47,7 @@
                 <c:forEach var="usuario" items="${users}">
                     <tr>
                         <td>
-                            <a href="<c:url value="EliminarUsuario"><c:param name="user" value="${usuario.username}"/></c:url>" >
+                            <a href="<c:url value="EliminarUsuario"><c:param name="user" value="${usuario.id}"/></c:url>" >
                                     <span class="glyphicon glyphicon-remove"></span> Eliminar
                                 </a>
                             </td>

@@ -4,10 +4,13 @@
 
 <hibernate-mapping>
     <class name="com.masscomm.common.Usuario" table="Usuario" catalog="masscomm">
-        <id name="username" type="string">
-            <column name="username" length="50" not-null="true"/>
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
             <generator class="identity" />
         </id>
+        <property name="username" type="string">
+            <column name="username" length="50" not-null="true" unique="true" />
+        </property>
         <property name="password" type="string">
             <column name="password" length="50" not-null="true" unique="false" />
         </property>

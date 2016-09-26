@@ -8,6 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
     request.setAttribute("isAdmin", request.isUserInRole("administrador"));
+    request.setAttribute("username", request.getUserPrincipal().getName().toUpperCase());
 %>
 <!DOCTYPE html>
 <html>
@@ -26,7 +27,7 @@
     <body>
         <%@include file="navbar.html" %>
         <div class="container">
-            <h1>Home User</h1>
+            <h1 class="col-sm-offset-2 col-sm-8">Bienvenido a la gestión de visitantes y cumpleaños de Masscomm</h1>
         </div>
     </body>
 </html>

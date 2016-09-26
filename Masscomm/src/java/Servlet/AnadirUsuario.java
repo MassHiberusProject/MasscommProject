@@ -6,6 +6,7 @@
 package Servlet;
 
 import com.masscomm.common.ManageUsuario;
+import com.masscomm.common.RolesUsuarios;
 import com.masscomm.common.Usuario;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -49,8 +50,9 @@ public class AnadirUsuario extends HttpServlet {
                 String contraseniaEncriptada = DigestUtils.shaHex(contrasenia);
 
                 Usuario user = new Usuario(usuario, contraseniaEncriptada, mail);
-                int ok = ManageUsuario.save(user, rol);
-                if (ok != -1) {
+                RolesUsuarios role = new RolesUsuarios(user, rol);
+                int ok = ManageUsuario.save(user, role);
+                if (ok!=-1) {
                     request.setAttribute("msg", "El usuario ha sido añadido correctamente");
                     response.sendRedirect("ListaUsuarios");
                 } else {

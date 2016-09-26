@@ -18,7 +18,7 @@ import org.hibernate.Transaction;
  */
 public class ManageUsuario {
 
-    public static int save(Usuario user, String rol) {
+    public static int save(Usuario user, RolesUsuarios role) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
@@ -26,16 +26,13 @@ public class ManageUsuario {
         try {
             tx = sess.beginTransaction();
             ok = (Integer) sess.save(user);
-            String sql = "INSERT INTO RolesUsuarios(:user_name, :rol)";
-            ok = sess.createQuery(sql)
-                    .setParameter("user_name", user.getUsername())
-                    .setParameter("rol", rol)
-                    .executeUpdate();
+            sess.save(role);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
             }
+            ok = -1;
             throw e;
         } finally {
             sess.close();
@@ -81,11 +78,11 @@ public class ManageUsuario {
         }
     }
 
-    public static List list() {
+    public static List<Usuario> list() {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
-        List users = new ArrayList();
+        List<Usuario> users = new ArrayList();
         try {
             tx = sess.beginTransaction();
             users = sess.createQuery("from Usuario").list();

@@ -15,7 +15,7 @@
         <meta name="author" content="Hiberus Osaba">
 
         <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-        <link href="${ctx}/CSS/custom.css" rel="stylesheet" media="all" type="text/css">
+        <link href="${ctx}/CSS/customAdmin.css" rel="stylesheet" media="all" type="text/css">
         <link href="${ctx}/CSS/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
         <script src="${ctx}/JS/jquery-1.12.4.min.js"></script>
         <script src="${ctx}/JS/bootstrap.min.js"></script>
@@ -28,8 +28,8 @@
             </div>
         </div>
         <div class="row">
-            <div id="login_container" class="container">
-                <c:if test="${errorpwd !=null || errormail !=null}">
+            <div id="adduser_container" class="container">
+                <c:if test="${errorpwd !=null || errormail !=null || error!=null}">
                     <div class="row">
                         <div class="alert alert-danger col-sm-offset-3 col-sm-6" role="alert">
                             <ul>
@@ -38,6 +38,9 @@
                                 </c:if>
                                 <c:if test="${errormail !=null}">
                                     <li><c:out value="${errormail}"/></li>
+                                </c:if>
+                                <c:if test="${error !=null}">
+                                    <li><c:out value="${error}"/></li>
                                 </c:if>
                             </ul>
                         </div>
