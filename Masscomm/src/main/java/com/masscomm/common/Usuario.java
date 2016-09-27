@@ -5,6 +5,9 @@
  */
 package com.masscomm.common;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  *
  * @author pmayor
@@ -17,21 +20,12 @@ public class Usuario implements java.io.Serializable {
     private String username;
     private String password;
     private String email;
+    private Set<Rol> rols = new HashSet<Rol>();
 
     public Usuario() {
-        this.username = "";
-        this.password = "";
-        this.email = "";
     }
 
     public Usuario(String username, String password, String email) {
-        this.username = username;
-        this.password = password;
-        this.email = email;
-    }
-
-    public Usuario(int id, String username, String password, String email) {
-        this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
@@ -68,4 +62,13 @@ public class Usuario implements java.io.Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public Set<Rol> getRols() {
+        return rols;
+    }
+
+    public void setRols(Set<Rol> rols) {
+        this.rols = rols;
+    }
+
 }

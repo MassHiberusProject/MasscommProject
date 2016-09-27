@@ -7,9 +7,9 @@
            digest="sha1"
            driverName="com.mysql.jdbc.Driver"
            name="masscomm"
-           roleNameCol="rol"
+           roleNameCol="rolname"
            userCredCol="password"
            userNameCol="username"
-           userRoleTable="RolesUsuarios"
-           userTable="Usuario"/>
+           userRoleTable="v_user_role"
+           userTable="v_user_role"/>
 </Context>

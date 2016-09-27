@@ -25,8 +25,6 @@ public class ListaUsuarios extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        //Comprobar si hay usuario logeado
 
         List<Usuario> users = ManageUsuario.list();
         request.setAttribute("users", users);

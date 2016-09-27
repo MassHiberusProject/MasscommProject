@@ -17,5 +17,10 @@
         <property name="email" type="string">
             <column name="email" length="200" not-null="true" unique="true" />
         </property>
+        <set name="rols" table="UsuarioRol"
+             inverse="false" lazy="true" fetch="select">
+            <key column="usuario_id" />
+            <many-to-many column="rol_id" class="com.masscomm.common.Rol" />
+        </set>
     </class>
 </hibernate-mapping>

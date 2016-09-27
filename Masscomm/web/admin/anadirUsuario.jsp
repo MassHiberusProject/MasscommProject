@@ -29,19 +29,28 @@
         </div>
         <div class="row">
             <div id="adduser_container" class="container">
-                <c:if test="${errorpwd !=null || errormail !=null || error!=null}">
+                <c:if test="${errorpwd !=null || errormail !=null || error!=null || errorrol !=null || errorname !=null || erroremail !=null}">
                     <div class="row">
                         <div class="alert alert-danger col-sm-offset-3 col-sm-6" role="alert">
                             <ul>
                                 <c:if test="${errorpwd !=null}">
                                     <li><c:out value="${errorpwd}"/></li>
-                                </c:if>
-                                <c:if test="${errormail !=null}">
+                                    </c:if>
+                                    <c:if test="${errormail !=null}">
                                     <li><c:out value="${errormail}"/></li>
-                                </c:if>
-                                <c:if test="${error !=null}">
+                                    </c:if>
+                                    <c:if test="${error !=null}">
                                     <li><c:out value="${error}"/></li>
-                                </c:if>
+                                    </c:if>
+                                    <c:if test="${errorrol !=null}">
+                                    <li><c:out value="${errorrol}"/></li>
+                                    </c:if>
+                                    <c:if test="${errorname !=null}">
+                                    <li><c:out value="${errorname}"/></li>
+                                    </c:if>
+                                    <c:if test="${erroremail !=null}">
+                                    <li><c:out value="${erroremail}"/></li>
+                                    </c:if>
                             </ul>
                         </div>
                     </div>
@@ -71,8 +80,9 @@
                     <div class="form-group">
                         <label for="inputRol" class="col-sm-4 control-label">Rol *</label>
                         <div class="col-sm-5">
-                            <label class="radio-inline"><input type="radio" name="rol" id="rol1" checked="true" value="usuario">Usuario</label>
-                            <label class="radio-inline"><input type="radio" name="rol" id="rol2" value="administrador">Administrador</label>
+                            <c:forEach var="rol" items="${rols}">
+                                <label class="radio-inline"><input type="checkbox" name="rol" id="rol1" value="${rol.id}"> ${rol.rolname}</label>
+                                </c:forEach>
                         </div>
                     </div>
                     <div class="form-group">

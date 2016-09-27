@@ -5,73 +5,96 @@
  */
 package Servlet;
 
+import com.masscomm.common.ManageUsuario;
+import com.masscomm.common.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
  * @author Paula
  */
 public class ConfigurarCuenta extends HttpServlet {
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ConfigurarCuenta</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ConfigurarCuenta at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        List<Usuario> users = ManageUsuario.listOneUser(request.getUserPrincipal().getName());
+        if (users == null) {
+            request.setAttribute("error", "No es posible configurar la cuenta");
+            RequestDispatcher rd = request.getRequestDispatcher("configurarCuenta.jsp");
+            rd.forward(request, response);
+        } else {
+            request.setAttribute("usuario", users.get(0));
+            RequestDispatcher rd = request.getRequestDispatcher("configurarCuenta.jsp");
+            rd.forward(request, response);
+        }
     }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        String usuario = request.getParameter("usr");
+        request.setAttribute("usr", usuario);
+        String contrasenia = request.getParameter("pwd");
+        request.setAttribute("pwd", contrasenia);
+        String mail = request.getParameter("mail");
+        request.setAttribute("mail", mail);
+        String id = request.getParameter("id");
+        request.setAttribute("id", id);
+        
+        try {
+            
+            int ident = Integer.parseInt(id);
+            
+            boolean correcto = true;
+            
+            if ((contrasenia != null || contrasenia.compareTo("") != 0) && !contrasenia.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,40}$")) {
+                request.setAttribute("errorpwd", "La contraseña no cumple con la complejidad mínima");
+                correcto = false;
+            }
+            if (!mail.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) {
+                request.setAttribute("errormail", "El correo electrónico no es válido");
+                correcto = false;
+            }
+            if (ManageUsuario.existeNameNotme(usuario, ident)) {
+                request.setAttribute("errorname", "Ya existe un usuario con ese nombre");
+                correcto = false;
+            }
+            if (ManageUsuario.existeEmailNotme(mail, ident)) {
+                request.setAttribute("erroremail", "Ya existe un usuario con ese correo electrónico");
+                correcto = false;
+            }
+            if (correcto) {
+                
+                Usuario user = ManageUsuario.read(ident);
+                user.setUsername(usuario);
+                user.setEmail(mail);
+                if (contrasenia != null || contrasenia.compareTo("") != 0) {
+                    String contraseniaEncriptada = DigestUtils.shaHex(contrasenia);
+                    user.setPassword(contraseniaEncriptada);
+                }
+                ManageUsuario.update(user);
+                request.setAttribute("msg", "La configuración ha sido correctamente editada");
+                response.sendRedirect("Inicio");
+            } else {
+                RequestDispatcher rd = request.getRequestDispatcher("anadirUsuario.jsp");
+                rd.forward(request, response);
+            }
+        } catch (NumberFormatException e) {
+            request.setAttribute("errorconf", "Error al intentar editar la cuenta");
+            RequestDispatcher rd = request.getRequestDispatcher("configurarCuenta.jsp");
+            rd.forward(request, response);
+        }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
+    
 }

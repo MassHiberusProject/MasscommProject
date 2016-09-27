@@ -25,18 +25,25 @@ public class EliminarUsuario extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         String name = request.getParameter("user");
-        Usuario user = ManageUsuario.read(name);
-        if (user != null) {
-            ManageUsuario.delete(user);
-            Usuario userEmpty = ManageUsuario.read(name);
-            if(userEmpty == null || userEmpty.getUsername().isEmpty()){
-                request.setAttribute("msg", "El usuario ha sido eliminado correctamente");
-            }else{
+        try {
+            int id = Integer.parseInt(name);
+            Usuario user = ManageUsuario.read(id);
+            if (user != null) {
+                ManageUsuario.delete(user);
+                Usuario userEmpty = ManageUsuario.read(id);
+                if (userEmpty == null) {
+                    request.setAttribute("msg", "El usuario ha sido eliminado correctamente");
+                } else {
+                    request.setAttribute("error", "Error al intentar eliminar el usuario");
+                }
+            } else {
                 request.setAttribute("error", "Error al intentar eliminar el usuario");
             }
-        } else {
+            response.sendRedirect("ListaUsuarios");
+        }catch (NumberFormatException e){
             request.setAttribute("error", "Error al intentar eliminar el usuario");
+            response.sendRedirect("ListaUsuarios");
         }
-        response.sendRedirect("ListaUsuarios");
+
     }
 }
