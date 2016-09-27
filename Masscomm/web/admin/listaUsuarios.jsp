@@ -40,7 +40,7 @@
         <div id="listaUsuarios" class="table-responsive col-sm-offset-3 col-sm-6">
             <table class="table table-hover">
                 <tr>
-                    <th class="col-sm-3">&nbsp;</th>
+                    <th>&nbsp;</th>
                     <th>Nombre de usuario</th>
                     <th>Correo electrónico</th>
                 </tr>
@@ -49,6 +49,9 @@
                         <td>
                             <a href="<c:url value="EliminarUsuario"><c:param name="user" value="${usuario.id}"/></c:url>" >
                                     <span class="glyphicon glyphicon-remove"></span> Eliminar
+                                </a>
+                                <a href="<c:url value="EditarUsuario"><c:param name="user" value="${usuario.id}"/></c:url>" >
+                                    <span class="glyphicon glyphicon-pencil"></span> Editar
                                 </a>
                             </td>
                             <td>${usuario.username}</td>

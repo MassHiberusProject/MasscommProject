@@ -7,8 +7,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+    HttpSession misession = (HttpSession) request.getSession();
+    String usuario = (String) misession.getAttribute("username");
     request.setAttribute("isAdmin", request.isUserInRole("administrador"));
-    request.setAttribute("username", request.getUserPrincipal().getName().toUpperCase());
+    if (usuario == null) {
+        request.setAttribute("username", request.getUserPrincipal().getName().toUpperCase());
+    } else {
+        request.setAttribute("username", usuario.toUpperCase());
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -42,6 +48,29 @@
                         </div>
                     </c:when>
                     <c:otherwise>
+                        <c:if test="${errorpwd !=null || errormail !=null || errorname !=null || erroremail !=null || errorconf !=null}">
+                            <div class="row">
+                                <div class="alert alert-danger col-sm-offset-3 col-sm-6" role="alert">
+                                    <ul>
+                                        <c:if test="${errorpwd !=null}">
+                                            <li><c:out value="${errorpwd}"/></li>
+                                            </c:if>
+                                            <c:if test="${errormail !=null}">
+                                            <li><c:out value="${errormail}"/></li>
+                                            </c:if>
+                                            <c:if test="${errorname !=null}">
+                                            <li><c:out value="${errorname}"/></li>
+                                            </c:if>
+                                            <c:if test="${erroremail !=null}">
+                                            <li><c:out value="${erroremail}"/></li>
+                                            </c:if>
+                                            <c:if test="${errorconf !=null}">
+                                            <li><c:out value="${errorconf}"/></li>
+                                            </c:if>
+                                    </ul>
+                                </div>
+                            </div>
+                        </c:if>
                         <form class="form-horizontal" name="login" id="flogin" action="ConfigurarCuenta" method="post">
                             <div class="form-group">
                                 <label for="inputUser" class="col-sm-4 control-label">Usuario</label>

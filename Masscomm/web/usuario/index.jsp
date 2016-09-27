@@ -7,8 +7,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
+    HttpSession misession = (HttpSession) request.getSession();
+    String usuario = (String) misession.getAttribute("username");
     request.setAttribute("isAdmin", request.isUserInRole("administrador"));
-    request.setAttribute("username", request.getUserPrincipal().getName().toUpperCase());
+    if (usuario == null) {
+        request.setAttribute("username", request.getUserPrincipal().getName().toUpperCase());
+    } else {
+        request.setAttribute("username", usuario.toUpperCase());
+    }
 %>
 <!DOCTYPE html>
 <html>

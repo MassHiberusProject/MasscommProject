@@ -8,13 +8,14 @@ package Servlet;
 import com.masscomm.common.ManageUsuario;
 import com.masscomm.common.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
@@ -22,13 +23,20 @@ import org.apache.commons.codec.digest.DigestUtils;
  * @author Paula
  */
 public class ConfigurarCuenta extends HttpServlet {
-    
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        List<Usuario> users = ManageUsuario.listOneUser(request.getUserPrincipal().getName());
-        if (users == null) {
+        HttpSession misession = (HttpSession) request.getSession();
+        String usuario=(String) misession.getAttribute("username");
+        List<Usuario> users=new ArrayList<Usuario>();
+        if (usuario == null) {
+            users = ManageUsuario.listOneUser(request.getUserPrincipal().getName());
+        }else{
+            users = ManageUsuario.listOneUser(usuario);
+        }
+        if (users == null || users.isEmpty()) {
             request.setAttribute("error", "No es posible configurar la cuenta");
             RequestDispatcher rd = request.getRequestDispatcher("configurarCuenta.jsp");
             rd.forward(request, response);
@@ -38,7 +46,7 @@ public class ConfigurarCuenta extends HttpServlet {
             rd.forward(request, response);
         }
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -51,14 +59,14 @@ public class ConfigurarCuenta extends HttpServlet {
         request.setAttribute("mail", mail);
         String id = request.getParameter("id");
         request.setAttribute("id", id);
-        
+
         try {
-            
+
             int ident = Integer.parseInt(id);
-            
+
             boolean correcto = true;
-            
-            if ((contrasenia != null || contrasenia.compareTo("") != 0) && !contrasenia.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,40}$")) {
+
+            if (!contrasenia.isEmpty() && !contrasenia.matches("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,40}$")) {
                 request.setAttribute("errorpwd", "La contraseña no cumple con la complejidad mínima");
                 correcto = false;
             }
@@ -75,19 +83,28 @@ public class ConfigurarCuenta extends HttpServlet {
                 correcto = false;
             }
             if (correcto) {
-                
+
                 Usuario user = ManageUsuario.read(ident);
-                user.setUsername(usuario);
-                user.setEmail(mail);
-                if (contrasenia != null || contrasenia.compareTo("") != 0) {
-                    String contraseniaEncriptada = DigestUtils.shaHex(contrasenia);
-                    user.setPassword(contraseniaEncriptada);
+                if (user != null) {
+                    user.setUsername(usuario);
+                    user.setEmail(mail);
+                    if (!contrasenia.isEmpty()) {
+                        String contraseniaEncriptada = DigestUtils.shaHex(contrasenia);
+                        user.setPassword(contraseniaEncriptada);
+                    }
+                    ManageUsuario.update(user);
+                    request.setAttribute("msg", "La configuración ha sido correctamente editada");
+                    HttpSession misession = (HttpSession) request.getSession();
+                    misession.setAttribute("username", usuario);
+                    response.sendRedirect("Inicio");
+                } else {
+                    request.setAttribute("errorconf", "Error al intentar editar la cuenta");
+                    RequestDispatcher rd = request.getRequestDispatcher("configurarCuenta.jsp");
+                    rd.forward(request, response);
                 }
-                ManageUsuario.update(user);
-                request.setAttribute("msg", "La configuración ha sido correctamente editada");
-                response.sendRedirect("Inicio");
+
             } else {
-                RequestDispatcher rd = request.getRequestDispatcher("anadirUsuario.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("configurarCuenta.jsp");
                 rd.forward(request, response);
             }
         } catch (NumberFormatException e) {
@@ -96,5 +113,5 @@ public class ConfigurarCuenta extends HttpServlet {
             rd.forward(request, response);
         }
     }
-    
+
 }
