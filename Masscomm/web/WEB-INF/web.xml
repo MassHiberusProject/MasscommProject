@@ -24,6 +24,10 @@
         <servlet-name>ConfigurarCuenta</servlet-name>
         <servlet-class>Servlet.ConfigurarCuenta</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditarUsuario</servlet-name>
+        <servlet-class>Servlet.EditarUsuario</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AnadirUsuario</servlet-name>
         <url-pattern>/admin/AnadirUsuario</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>ConfigurarCuenta</servlet-name>
         <url-pattern>/usuario/ConfigurarCuenta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarUsuario</servlet-name>
+        <url-pattern>/admin/EditarUsuario</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

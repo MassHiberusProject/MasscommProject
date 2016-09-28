@@ -26,6 +26,19 @@ public class ListaUsuarios extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
+        String param = request.getParameter("msg");
+        if (param != null ) {
+            if(param.compareTo("ok") == 0){
+            request.setAttribute("msg", "El usuario ha sido añadido correctamente");
+            }else if (param.compareTo("okEdit") == 0){
+                request.setAttribute("msg", "El usuario ha sido modificado correctamente");
+            }else if (param.compareTo("okDelete") == 0){
+                request.setAttribute("msg", "El usuario ha sido eliminado correctamente");
+            }else if (param.compareTo("err") == 0){
+                request.setAttribute("error", "Error al intentar eliminar el usuario");
+            }
+        }
+
         List<Usuario> users = ManageUsuario.list();
         request.setAttribute("users", users);
 

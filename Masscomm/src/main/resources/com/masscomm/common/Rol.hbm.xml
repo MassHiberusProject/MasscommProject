@@ -11,10 +11,13 @@
         <property name="rolname" type="string">
             <column name="rolname" length="30" not-null="true" unique="true" />
         </property>
-        <set name="usuarios" table="UsuarioRol"
-             inverse="true" lazy="true" fetch="select">
-            <key column="rol_id" />
-            <many-to-many column="usuario_id" class="com.masscomm.common.Usuario" />
+        <set name="usuarios" table="UsuarioRol" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="rol_id" not-null="true" />
+            </key>
+            <many-to-many entity-name="com.masscomm.common.Usuario">
+                <column name="usuario_id" not-null="true" />
+            </many-to-many>
         </set>
     </class>
 </hibernate-mapping>

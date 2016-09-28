@@ -32,17 +32,15 @@ public class EliminarUsuario extends HttpServlet {
                 ManageUsuario.delete(user);
                 Usuario userEmpty = ManageUsuario.read(id);
                 if (userEmpty == null) {
-                    request.setAttribute("msg", "El usuario ha sido eliminado correctamente");
+                    response.sendRedirect("ListaUsuarios?msg=okDelete");
                 } else {
-                    request.setAttribute("error", "Error al intentar eliminar el usuario");
+                    response.sendRedirect("ListaUsuarios?msg=err");
                 }
             } else {
-                request.setAttribute("error", "Error al intentar eliminar el usuario");
+                response.sendRedirect("ListaUsuarios?msg=err");
             }
-            response.sendRedirect("ListaUsuarios");
         }catch (NumberFormatException e){
-            request.setAttribute("error", "Error al intentar eliminar el usuario");
-            response.sendRedirect("ListaUsuarios");
+            response.sendRedirect("ListaUsuarios?msg=err");
         }
 
     }

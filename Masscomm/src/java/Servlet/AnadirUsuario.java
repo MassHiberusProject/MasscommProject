@@ -74,8 +74,7 @@ public class AnadirUsuario extends HttpServlet {
             }
             int ok = ManageUsuario.save(user);
             if (ok != -1) {
-                request.setAttribute("msg", "El usuario ha sido añadido correctamente");
-                response.sendRedirect("ListaUsuarios");
+                response.sendRedirect("ListaUsuarios?msg=ok");
             } else {
                 request.setAttribute("error", "Error al intentar añadir el usuario");
                 RequestDispatcher rd = request.getRequestDispatcher("anadirUsuario.jsp");

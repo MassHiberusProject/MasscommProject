@@ -33,6 +33,13 @@
     <body>
         <%@include file="navbar.html" %>
         <div class="container">
+            <c:if test="${msg!=null}">
+                <div class="row">
+                    <div class="alert alert-success col-sm-offset-3 col-sm-6" role="alert">
+                        <p><c:out value="${msg}"/></p>
+                    </div>
+                </div>
+            </c:if>
             <h1 class="col-sm-offset-2 col-sm-8">Bienvenido a la gestión de visitantes y cumpleaños de Masscomm</h1>
         </div>
     </body>

@@ -97,12 +97,13 @@ public class ManageUsuario {
         Usuario user = new Usuario();
         try {
             tx = sess.beginTransaction();
-            user = (Usuario) sess.load(Usuario.class, id);
+            user = (Usuario) sess.get(Usuario.class, id);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
             }
+            throw e;
         } finally {
             sess.close();
         }
