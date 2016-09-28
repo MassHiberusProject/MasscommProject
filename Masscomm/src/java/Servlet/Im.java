@@ -5,13 +5,11 @@
  */
 package Servlet;
 
-import com.masscomm.common.ManageCumpleanios;
-import com.masscomm.persistence.HibernateUtil;
+import com.masscomm.common.ManageImagen;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,22 +19,23 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author claencina
  */
-public class Cumpleanios extends HttpServlet {
+public class Im extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8"); 
-        
-        
-        
-        List<com.masscomm.common.Cumpleanios> cumpleanios = ManageCumpleanios.list();
-        
-        
-        
-        request.setAttribute("cumpleanios", cumpleanios);
-        RequestDispatcher rd = request.getRequestDispatcher("cumpleanios.jsp");
-        rd.forward(request, response);
+        String id = request.getParameter("id");
+        int idIm = Integer.parseInt(id);
+        OutputStream out;
+
+        try {
+            response.setContentType("image/png");
+            out = response.getOutputStream();
+                out.write(ManageImagen.read(idIm).getImage());
             
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

@@ -19,14 +19,14 @@ public class Cumpleanios implements java.io.Serializable {
     private String nombre;
     private String apellidos;
     private String empresa;
-    private Integer foto;
+    private Imagen image_id;
     private Date fecha;
 
-    public Cumpleanios(String nombre, String apellidos, String empresa, Integer foto, Date fecha) {
+    public Cumpleanios(String nombre, String apellidos, String empresa, Imagen image_id, Date fecha) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.empresa = empresa;
-        this.foto = foto;
+        this.image_id = image_id;
         this.fecha = fecha;
     }
 
@@ -64,14 +64,15 @@ public class Cumpleanios implements java.io.Serializable {
     public void setEmpresa(String empresa) {
         this.empresa = empresa;
     }
-    
-    public Integer getFoto() {
-        return foto;
+
+    public Imagen getImage_id() {
+        return image_id;
     }
 
-    public void setFoto(Integer foto) {
-        this.foto = foto;
+    public void setImage_id(Imagen image_id) {
+        this.image_id = image_id;
     }
+    
     
     public Date getFecha() {
         return fecha;

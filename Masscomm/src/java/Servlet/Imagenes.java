@@ -6,10 +6,13 @@
 package Servlet;
 
 import com.masscomm.common.ManageCumpleanios;
-import com.masscomm.persistence.HibernateUtil;
+import com.masscomm.common.ManageImagen;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
+import java.nio.file.Files;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,22 +24,17 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author claencina
  */
-public class Cumpleanios extends HttpServlet {
+public class Imagenes extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8"); 
+
+        List<com.masscomm.common.Imagen> imagenes = ManageImagen.list();
         
-        
-        
-        List<com.masscomm.common.Cumpleanios> cumpleanios = ManageCumpleanios.list();
-        
-        
-        
-        request.setAttribute("cumpleanios", cumpleanios);
-        RequestDispatcher rd = request.getRequestDispatcher("cumpleanios.jsp");
+
+        request.setAttribute("imagen", imagenes);
+        RequestDispatcher rd = request.getRequestDispatcher("imagenes.jsp");
         rd.forward(request, response);
-            
     }
 }

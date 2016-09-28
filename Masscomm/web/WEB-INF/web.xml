@@ -16,6 +16,22 @@
         <servlet-name>EditarCumpleanios</servlet-name>
         <servlet-class>Servlet.EditarCumpleanios</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Imagenes</servlet-name>
+        <servlet-class>Servlet.Imagenes</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Im</servlet-name>
+        <servlet-class>Servlet.Im</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AnadirCumpleanios</servlet-name>
+        <servlet-class>Servlet.AnadirCumpleanios</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>GenerarRSS</servlet-name>
+        <servlet-class>Servlet.GenerarRSS</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>autenticacion</servlet-name>
         <url-pattern>/autenticacion</url-pattern>
@@ -31,6 +47,22 @@
     <servlet-mapping>
         <servlet-name>EditarCumpleanios</servlet-name>
         <url-pattern>/EditarCumpleanios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Imagenes</servlet-name>
+        <url-pattern>/Imagenes</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Im</servlet-name>
+        <url-pattern>/Im</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AnadirCumpleanios</servlet-name>
+        <url-pattern>/AnadirCumpleanios</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GenerarRSS</servlet-name>
+        <url-pattern>/GenerarRSS</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

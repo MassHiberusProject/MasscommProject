@@ -5,15 +5,11 @@
  */
 package Servlet;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import com.masscomm.common.Cumpleanios;
 import com.masscomm.common.Imagen;
 import com.masscomm.common.ManageCumpleanios;
 import com.masscomm.common.ManageImagen;
+import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,19 +17,21 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
-import javax.servlet.http.HttpSession;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import java.io.File;
 
 /**
  *
  * @author claencina
  */
-public class EditarCumpleanios extends HttpServlet {
+public class AnadirCumpleanios extends HttpServlet {
 
     private int contador;
 
@@ -43,42 +41,21 @@ public class EditarCumpleanios extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         contador = 0;
 
-        HttpSession sesion = request.getSession();
+        java.util.Date fecha = new Date();
+        request.setAttribute("fecha", fecha);
+        request.setAttribute("contador", contador);
 
-        String idS = request.getParameter("id");
-        Integer id = null;
-        try {
-            id = Integer.parseInt(idS);
-        } catch (Exception e) {
-            response.sendRedirect("Cumpleanios");
-            return;
-        }
-        
-        sesion.setAttribute("id", idS);
-        Cumpleanios c = new Cumpleanios();
-        c = ManageCumpleanios.read(id);
-        if (c != null) {
-            java.util.Date fecha = new Date();
-            request.setAttribute("fecha", fecha);
-            request.setAttribute("contador", contador);
-
-            request.setAttribute("cumpleanios", c);
-
-            RequestDispatcher rd = request.getRequestDispatcher("editarCumpleanios.jsp");
-            rd.forward(request, response);
-        }else{
-            response.sendRedirect("Cumpleanios");
-        }
-
+        RequestDispatcher rd = request.getRequestDispatcher("anadirCumpleanios.jsp");
+        rd.forward(request, response);
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
         contador = 0;
 
-        HttpSession sesion = request.getSession();
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 
         if (isMultipart) {
@@ -111,13 +88,8 @@ public class EditarCumpleanios extends HttpServlet {
 
                     }
                 }
-                String idS = (String) sesion.getAttribute("id");
-                Integer id = Integer.parseInt(idS);
 
-                Cumpleanios c = ManageCumpleanios.read(id);
-                if (c.getImage_id() != null) {
-                    request.setAttribute("foto_id", c.getImage_id().getImage_id());
-                }
+                com.masscomm.common.Cumpleanios c = new com.masscomm.common.Cumpleanios();
 
                 request.setAttribute("nombre", nombre);
                 request.setAttribute("apellidos", apellidos);
@@ -126,15 +98,16 @@ public class EditarCumpleanios extends HttpServlet {
                 Date fecha = null;
 
                 if (fech.toString().length() != 0) {
-
                     try {
                         fecha = formato.parse(fech);
                         request.setAttribute("fech", fecha);
+                        c.setFecha(fecha);
 
                     } catch (ParseException ex) {
                         Logger.getLogger(EditarCumpleanios.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
+                    request.setAttribute("f", fecha);
                     fecha = new Date();
                     request.setAttribute("fech", fecha);
                 }
@@ -153,7 +126,7 @@ public class EditarCumpleanios extends HttpServlet {
                 if (contador != 0) {
                     request.setAttribute("contador", contador);
 
-                    RequestDispatcher rd = request.getRequestDispatcher("editarCumpleanios.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("anadirCumpleanios.jsp");
                     rd.forward(request, response);
                 } else {
 
@@ -164,13 +137,6 @@ public class EditarCumpleanios extends HttpServlet {
 
                         File im = new File(rutaI + "/" + foto.getName());
                         Imagen imagen = null;
-                        if (c.getImage_id() != null) {
-                            Integer idIB = c.getImage_id().getImage_id();
-                            Imagen imagenB = new Imagen();
-                            imagenB = ManageImagen.read(idIB);
-                            ManageImagen.delete(imagenB);
-                        }
-
                         int cod = ManageImagen.save(im);
                         imagen = ManageImagen.read(cod);
 
@@ -179,11 +145,16 @@ public class EditarCumpleanios extends HttpServlet {
                     }
 
                     c.setNombre(nombre);
-                    c.setApellidos(apellidos);
-                    c.setEmpresa(empresa);
-                    c.setFecha(fecha);
 
-                    ManageCumpleanios.update(c);
+                    if (apellidos.length() != 0) {
+                        c.setApellidos(apellidos);
+                    }
+                    if (empresa.length() != 0) {
+                        c.setEmpresa(empresa);
+                    }
+                    
+
+                    ManageCumpleanios.save(c);
                     response.sendRedirect("Cumpleanios");
                 }
 
@@ -194,6 +165,7 @@ public class EditarCumpleanios extends HttpServlet {
             }
 
         }
+
     }
 
 }

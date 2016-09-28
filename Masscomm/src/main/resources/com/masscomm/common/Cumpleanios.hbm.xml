@@ -9,7 +9,7 @@
             <generator class="identity" />
         </id>
         <property name="nombre" type="string">
-            <column name="nombre" length="20" not-null="false" unique="false" />
+            <column name="nombre" length="20" not-null="true" unique="false" />
         </property>
         <property name="apellidos" type="string">
             <column name="apellidos" length="50" not-null="false" unique="false" />
@@ -18,8 +18,11 @@
             <column name="empresa" length="50" not-null="false" unique="false" />
         </property>        
         <property name="fecha" type="date">
-            <column name="fecha" not-null="false" unique="false" />
-        </property>        
-        
+            <column name="fecha" not-null="true" unique="false" />
+        </property>  
+        <many-to-one name="image_id" class="com.masscomm.common.Imagen" fetch="select">
+            <column name="image_id" not-null="false">
+            </column>
+        </many-to-one>
     </class>
 </hibernate-mapping>
