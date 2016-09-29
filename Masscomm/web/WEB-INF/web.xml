@@ -28,6 +28,18 @@
         <servlet-name>EditarUsuario</servlet-name>
         <servlet-class>Servlet.EditarUsuario</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RecuerdaContrasenia</servlet-name>
+        <servlet-class>Servlet.RecuerdaContrasenia</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PideNuevaContrasenia</servlet-name>
+        <servlet-class>Servlet.PideNuevaContrasenia</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CambioContrasenia</servlet-name>
+        <servlet-class>Servlet.CambioContrasenia</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AnadirUsuario</servlet-name>
         <url-pattern>/admin/AnadirUsuario</url-pattern>
@@ -55,6 +67,18 @@
     <servlet-mapping>
         <servlet-name>EditarUsuario</servlet-name>
         <url-pattern>/admin/EditarUsuario</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RecuerdaContrasenia</servlet-name>
+        <url-pattern>/RecuerdaContrasenia</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PideNuevaContrasenia</servlet-name>
+        <url-pattern>/PideNuevaContrasenia</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CambioContrasenia</servlet-name>
+        <url-pattern>/CambioContrasenia</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -90,4 +114,20 @@
             <form-error-page>/errorLogin.jsp</form-error-page>
         </form-login-config>
     </login-config>
+    <servlet>
+        <servlet-name>SimpleCaptcha</servlet-name>
+        <servlet-class>nl.captcha.servlet.SimpleCaptchaServlet</servlet-class>
+        <init-param>
+            <param-name>captcha-width</param-name>
+            <param-value>300</param-value>
+        </init-param>
+        <init-param>
+            <param-name>captcha-height</param-name>
+            <param-value>100</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SimpleCaptcha</servlet-name>
+        <url-pattern>/simpleCaptcha.png</url-pattern>
+    </servlet-mapping>
 </web-app>

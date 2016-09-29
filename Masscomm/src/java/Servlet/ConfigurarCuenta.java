@@ -92,7 +92,7 @@ public class ConfigurarCuenta extends HttpServlet {
                         String contraseniaEncriptada = DigestUtils.shaHex(contrasenia);
                         user.setPassword(contraseniaEncriptada);
                     }
-                    ManageUsuario.update(user);
+                    ManageUsuario.update(user,null);
                     
                     HttpSession misession = (HttpSession) request.getSession();
                     misession.setAttribute("username", usuario);

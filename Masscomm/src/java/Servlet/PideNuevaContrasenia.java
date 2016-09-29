@@ -5,30 +5,35 @@
  */
 package Servlet;
 
+import com.masscomm.common.ManageContrasenia;
+import com.masscomm.common.Usuario;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author Paula
+ * @author pmayor
  */
-public class Inicio extends HttpServlet {
+public class PideNuevaContrasenia extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String param=request.getParameter("msg");
-        if(param !=null && param.compareTo("ok")==0){
-            request.setAttribute("msg", "La configuración ha sido correctamente editada");
-        }else if(param !=null && param.compareTo("okCambio")==0){
-            request.setAttribute("msg", "La contraseña ha sido correctamente modificada");
+        String cod = request.getParameter("cc");
+        List<Usuario> idusers = ManageContrasenia.existeCodigo(cod);
+        if (idusers == null || idusers.isEmpty()) {
+            response.sendRedirect("CambioContrasenia?msg=error");
+        } else {
+            HttpSession sesion = request.getSession();
+            sesion.setAttribute("iduser", idusers.get(0).getId());
+            System.out.println(idusers.get(0).getId());
+            response.sendRedirect("CambioContrasenia");
         }
-        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
-        rd.forward(request, response);
     }
 
     @Override
@@ -42,4 +47,5 @@ public class Inicio extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
 }

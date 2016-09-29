@@ -8,6 +8,7 @@ package com.masscomm.common;
 import com.masscomm.persistence.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -37,13 +38,18 @@ public class ManageUsuario {
         return ok;
     }
 
-    public static void update(Usuario user) {
+    public static void update(Usuario user, Set<Rol> rls) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
         try {
             tx = sess.beginTransaction();
             sess.update(user);
+            if (rls != null) {
+                for (Rol r : rls) {
+                    sess.merge(r);
+                }
+            }
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {

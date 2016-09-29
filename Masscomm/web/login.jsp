@@ -37,7 +37,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-5">
-                        <a href="#">No recuerdo mi contraseña</a>
+                        <a href="../RecuerdaContrasenia">He olvidado mi contraseña</a>
                     </div>
                 </div>
                 <div class="form-group">

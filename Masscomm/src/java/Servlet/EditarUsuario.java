@@ -9,6 +9,7 @@ import com.masscomm.common.ManageUsuario;
 import com.masscomm.common.Rol;
 import com.masscomm.common.Usuario;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.servlet.RequestDispatcher;
@@ -99,18 +100,20 @@ public class EditarUsuario extends HttpServlet {
                         user.setPassword(contraseniaEncriptada);
                     }
                     Rol role = new Rol();
+                    Set <Rol> rls=new HashSet<Rol>();
                     for (String r : rol) {
                         try {
                             int idRol = Integer.parseInt(r);
                             role = ManageUsuario.readRol(idRol);
-                            user.getRols().add(role);
+                            role.getUsuarios().add(user);
+                            rls.add(role);
                         } catch (NumberFormatException e) {
                             request.setAttribute("error", "Error al intentar añadir el usuario");
                             RequestDispatcher rd = request.getRequestDispatcher("anadirUsuario.jsp");
                             rd.forward(request, response);
                         }
                     }
-                    ManageUsuario.update(user);
+                    ManageUsuario.update(user, rls);
                     response.sendRedirect("ListaUsuarios?msg=okEdit");
                 } else {
                     request.setAttribute("errorconf", "Error al intentar editar el usuario");
