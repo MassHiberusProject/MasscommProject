@@ -1,137 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
-    <listener>
-        <description>ServletContextListener</description>
-        <listener-class>Servlet.BorradorPeticionesContrasenia</listener-class>
-    </listener>
     <servlet>
-        <servlet-name>AnadirUsuario</servlet-name>
-        <servlet-class>Servlet.AnadirUsuario</servlet-class>
+        <servlet-name>autenticacion</servlet-name>
+        <servlet-class>autenticacion</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ListaUsuarios</servlet-name>
-        <servlet-class>Servlet.ListaUsuarios</servlet-class>
+        <servlet-name>Cumpleanios</servlet-name>
+        <servlet-class>Servlet.Cumpleanios</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EliminarUsuario</servlet-name>
-        <servlet-class>Servlet.EliminarUsuario</servlet-class>
+        <servlet-name>EliminarCumpleanios</servlet-name>
+        <servlet-class>Servlet.EliminarCumpleanios</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CerrarSesion</servlet-name>
-        <servlet-class>Servlet.CerrarSesion</servlet-class>
+        <servlet-name>EditarCumpleanios</servlet-name>
+        <servlet-class>Servlet.EditarCumpleanios</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Inicio</servlet-name>
-        <servlet-class>Servlet.Inicio</servlet-class>
+        <servlet-name>Imagenes</servlet-name>
+        <servlet-class>Servlet.Imagenes</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ConfigurarCuenta</servlet-name>
-        <servlet-class>Servlet.ConfigurarCuenta</servlet-class>
+        <servlet-name>Im</servlet-name>
+        <servlet-class>Servlet.Im</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>EditarUsuario</servlet-name>
-        <servlet-class>Servlet.EditarUsuario</servlet-class>
+        <servlet-name>AnadirCumpleanios</servlet-name>
+        <servlet-class>Servlet.AnadirCumpleanios</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RecuerdaContrasenia</servlet-name>
-        <servlet-class>Servlet.RecuerdaContrasenia</servlet-class>
+        <servlet-name>GenerarRSS</servlet-name>
+        <servlet-class>Servlet.GenerarRSS</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PideNuevaContrasenia</servlet-name>
-        <servlet-class>Servlet.PideNuevaContrasenia</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CambioContrasenia</servlet-name>
-        <servlet-class>Servlet.CambioContrasenia</servlet-class>
+        <servlet-name>AnadirFondo</servlet-name>
+        <servlet-class>Servlet.AnadirFondo</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>AnadirUsuario</servlet-name>
-        <url-pattern>/admin/AnadirUsuario</url-pattern>
+        <servlet-name>autenticacion</servlet-name>
+        <url-pattern>/autenticacion</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ListaUsuarios</servlet-name>
-        <url-pattern>/admin/ListaUsuarios</url-pattern>
+        <servlet-name>Cumpleanios</servlet-name>
+        <url-pattern>/Cumpleanios</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EliminarUsuario</servlet-name>
-        <url-pattern>/admin/EliminarUsuario</url-pattern>
+        <servlet-name>EliminarCumpleanios</servlet-name>
+        <url-pattern>/EliminarCumpleanios</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CerrarSesion</servlet-name>
-        <url-pattern>/CerrarSesion</url-pattern>
+        <servlet-name>EditarCumpleanios</servlet-name>
+        <url-pattern>/EditarCumpleanios</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Inicio</servlet-name>
-        <url-pattern>/usuario/Inicio</url-pattern>
+        <servlet-name>Imagenes</servlet-name>
+        <url-pattern>/Imagenes</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ConfigurarCuenta</servlet-name>
-        <url-pattern>/usuario/ConfigurarCuenta</url-pattern>
+        <servlet-name>Im</servlet-name>
+        <url-pattern>/Im</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>EditarUsuario</servlet-name>
-        <url-pattern>/admin/EditarUsuario</url-pattern>
+        <servlet-name>AnadirCumpleanios</servlet-name>
+        <url-pattern>/AnadirCumpleanios</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RecuerdaContrasenia</servlet-name>
-        <url-pattern>/RecuerdaContrasenia</url-pattern>
+        <servlet-name>GenerarRSS</servlet-name>
+        <url-pattern>/GenerarRSS</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PideNuevaContrasenia</servlet-name>
-        <url-pattern>/PideNuevaContrasenia</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CambioContrasenia</servlet-name>
-        <url-pattern>/CambioContrasenia</url-pattern>
+        <servlet-name>AnadirFondo</servlet-name>
+        <url-pattern>/AnadirFondo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Area de administracion</web-resource-name>
-            <url-pattern>/admin/*</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>administrador</role-name>
-        </auth-constraint>
-    </security-constraint>
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Area de usuario</web-resource-name>
-            <url-pattern>/usuario/*</url-pattern>
-            <http-method>GET</http-method>
-            <http-method>POST</http-method>
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>usuario</role-name>
-        </auth-constraint>
-    </security-constraint>
-    <login-config>
-        <auth-method>FORM</auth-method>
-        <form-login-config>
-            <form-login-page>/login.jsp</form-login-page>
-            <form-error-page>/errorLogin.jsp</form-error-page>
-        </form-login-config>
-    </login-config>
-    <servlet>
-        <servlet-name>SimpleCaptcha</servlet-name>
-        <servlet-class>nl.captcha.servlet.SimpleCaptchaServlet</servlet-class>
-        <init-param>
-            <param-name>captcha-width</param-name>
-            <param-value>300</param-value>
-        </init-param>
-        <init-param>
-            <param-name>captcha-height</param-name>
-            <param-value>100</param-value>
-        </init-param>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>SimpleCaptcha</servlet-name>
-        <url-pattern>/simpleCaptcha.png</url-pattern>
-    </servlet-mapping>
 </web-app>
