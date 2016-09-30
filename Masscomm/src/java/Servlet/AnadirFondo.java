@@ -10,7 +10,6 @@ import com.masscomm.common.ManageCumpleanios;
 import com.masscomm.common.ManageFondo;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -73,6 +72,16 @@ public class AnadirFondo extends HttpServlet {
                 if (contador != 0) {
                     request.setAttribute("contador", contador);
                     request.setAttribute("cumpleanios", ManageCumpleanios.list());
+
+                    Fondo f = new Fondo();
+                    List<Fondo> fondos = ManageFondo.list();
+                    for (int i = 0; i < fondos.size(); i++) {
+                        if (fondos.get(i).getTipo().compareTo("C") == 0) {
+                            f = fondos.get(i);
+                        }
+                    }
+
+                    request.setAttribute("fondo", f.getNombre());
 
                     RequestDispatcher rd = request.getRequestDispatcher("cumpleanios.jsp");
                     rd.forward(request, response);
