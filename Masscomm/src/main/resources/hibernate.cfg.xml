@@ -11,5 +11,6 @@
    <property name="hibernate.connection.password">password</property>
    <mapping resource="com/masscomm/common/Usuario.hbm.xml"></mapping>
    <mapping resource="com/masscomm/common/Cumpleanios.hbm.xml"></mapping>
+   <mapping resource="com/masscomm/common/Fondo.hbm.xml"></mapping>
 </session-factory>
 </hibernate-configuration>

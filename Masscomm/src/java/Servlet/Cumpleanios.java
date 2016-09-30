@@ -5,7 +5,9 @@
  */
 package Servlet;
 
+import com.masscomm.common.Fondo;
 import com.masscomm.common.ManageCumpleanios;
+import com.masscomm.common.ManageFondo;
 import com.masscomm.persistence.HibernateUtil;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,9 +33,16 @@ public class Cumpleanios extends HttpServlet {
         
         
         List<com.masscomm.common.Cumpleanios> cumpleanios = ManageCumpleanios.list();
+        Fondo fondo = new Fondo();
+        List<Fondo> fondos = ManageFondo.list();
+        for(int i=0; i<fondos.size(); i++){
+            if(fondos.get(i).getTipo().compareTo("C")==0){
+                fondo = fondos.get(i);
+            }
+        }
         
         
-        
+        request.setAttribute("fondo", fondo.getNombre());
         request.setAttribute("cumpleanios", cumpleanios);
         RequestDispatcher rd = request.getRequestDispatcher("cumpleanios.jsp");
         rd.forward(request, response);

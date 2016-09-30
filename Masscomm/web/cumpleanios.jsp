@@ -54,17 +54,20 @@
                             }
                         })
                     }
-                    alert(codigos);
                     $.ajax("GenerarRSS", {
                         data: {'ids': codigos.toLocaleString()},
-                                dataType: 'json',
-                                error: function (resp, msg, ex) {
-                                alert("Error (" + resp.status + "):" + msg);
-                                }
+                        dataType: 'json',
+                        success: rss,
+                        error: function (resp, msg, ex) {
+                            alert("Error (" + resp.status + "):" + msg);
+                        }
                     });
                 });
+                function rss(data, msg, resp) {
+                    alert("llega");
+                }
             });
-            
+
         </script>
     </head>
     <body>
@@ -72,6 +75,7 @@
         <div class="container">
             <a class="btn btn-primary" href="AnadirCumpleanios" role="button" style="float: right">Nuevo cumpleaños</a>
             <br><br><br>
+
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -100,14 +104,35 @@
                                 <td> <fmt:formatDate pattern="dd 'de' MMMM" value="${cumple.fecha}" /></td>
                                 <td><c:if test="${cumple.imagen!=null}"><a target="_blank" href="img/${cumple.imagen}">Foto</a> </c:if> </td>                          
                                 <td> <input type="checkbox" value="${cumple.id} + ${cumple.fecha}"></label</td>
-                                
-                                
+
+
                             </tr>
                         </c:forEach>
                     </tbody>
                 </table>
             </div>
             <a id="bt_rss" class="btn btn-primary" href="" role="button">Generar RSS</a>
+            <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" <c:if test="${error_foto!=null}">aria-expanded="true"</c:if> <c:if test="${error_foto!=null}">aria-expanded="false"</c:if>aria-controls="collapseExample">
+                Añadir fondo
+            </a>
+            <div <c:if test="${error_foto!=null}"> class="collapse in" </c:if> <c:if test="${error_foto==null}"> class="collapse" </c:if> id="collapseExample" <c:if test="${error_foto!=null}"> aria-expended="true" </c:if>>
+                <br><br>
+                <c:if test="${error_foto!=null}">
+                    <div class="alert alert-danger">
+                        ${error_foto}
+                    </div>  
+                </c:if>
+                <form enctype="multipart/form-data" class="form-horizontal" name="login" id="flogin" action="AnadirFondo" method="post" style="margin-left: 15px;">
+                    <div class="form-group">
+                        <label for="inputFondo">Fondo</label>
+                        <c:if test="${fondo!=null}">
+                            <a target="_blank" href="fondo/${fondo}">Fondo</a>
+                        </c:if> 
+                        <input type="file" name="fondo" id="fondo">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar fondo</button>
+                </form>
+            </div>
         </div>
     </body>
 </html>

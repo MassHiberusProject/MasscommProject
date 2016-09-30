@@ -32,6 +32,10 @@
         <servlet-name>GenerarRSS</servlet-name>
         <servlet-class>Servlet.GenerarRSS</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AnadirFondo</servlet-name>
+        <servlet-class>Servlet.AnadirFondo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>autenticacion</servlet-name>
         <url-pattern>/autenticacion</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>GenerarRSS</servlet-name>
         <url-pattern>/GenerarRSS</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AnadirFondo</servlet-name>
+        <url-pattern>/AnadirFondo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
