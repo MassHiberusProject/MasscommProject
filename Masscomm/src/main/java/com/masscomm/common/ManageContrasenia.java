@@ -6,7 +6,6 @@
 package com.masscomm.common;
 
 import com.masscomm.persistence.HibernateUtil;
-import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,7 +40,7 @@ public class ManageContrasenia {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
-        List<Usuario> dev=null;
+        List<Usuario> dev = null;
         try {
             tx = sess.beginTransaction();
             dev = sess.createQuery("select userid from RecuerdoContrasenia where codigo = :cod")
@@ -55,5 +54,25 @@ public class ManageContrasenia {
             sess.close();
         }
         return dev;
+    }
+
+    public static int delete() {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = null;
+        int res = -1;
+        try {
+            tx = sess.beginTransaction();
+            res = sess.createSQLQuery("DELETE FROM RecuerdoContrasenia WHERE fecha < DATE_ADD(now(), INTERVAL '-5' MINUTE)").executeUpdate();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+            throw e;
+        } finally {
+            sess.close();
+        }
+        return res;
     }
 }

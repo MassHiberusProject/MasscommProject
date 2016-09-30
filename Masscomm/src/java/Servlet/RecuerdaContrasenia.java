@@ -10,6 +10,8 @@ import com.masscomm.common.ManageUsuario;
 import com.masscomm.common.RecuerdoContrasenia;
 import com.masscomm.common.Usuario;
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 import javax.mail.Message;
@@ -68,6 +70,8 @@ public class RecuerdaContrasenia extends HttpServlet {
             } else {
                 RecuerdoContrasenia recuerdo = new RecuerdoContrasenia(cod);
                 recuerdo.setUserid(usuarios.get(0));
+                Date fecha = new Date();
+                recuerdo.setFecha(new Timestamp(fecha.getTime()));
                 int ok = ManageContrasenia.save(recuerdo);
                 if (ok != -1) {
                     String urreles = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/PideNuevaContrasenia?cc=" + cod;

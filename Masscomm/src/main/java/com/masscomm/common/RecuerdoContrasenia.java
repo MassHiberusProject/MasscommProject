@@ -5,6 +5,8 @@
  */
 package com.masscomm.common;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author pmayor
@@ -15,6 +17,7 @@ public class RecuerdoContrasenia implements java.io.Serializable {
     private int id;
     private Usuario userid;
     private String codigo;
+    private Timestamp fecha;
 
     public RecuerdoContrasenia(String codigo) {
         this.codigo = codigo;
@@ -45,6 +48,14 @@ public class RecuerdoContrasenia implements java.io.Serializable {
 
     public void setUserid(Usuario userid) {
         this.userid = userid;
+    }
+
+    public Timestamp getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Timestamp fecha) {
+        this.fecha = fecha;
     }
 
 }

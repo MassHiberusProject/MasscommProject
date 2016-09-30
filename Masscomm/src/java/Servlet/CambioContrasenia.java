@@ -52,16 +52,15 @@ public class CambioContrasenia extends HttpServlet {
             if (correcto) {
                 try {
                     HttpSession sesion = request.getSession();
-                    int iduser = (Integer) sesion.getAttribute("iduser");
-                    Usuario user = ManageUsuario.read(iduser);
-                    if (user != null) {
+                    Usuario iduser = (Usuario)sesion.getAttribute("iduser");
+                    if (iduser != null) {
                         String contraseniaEncriptada = DigestUtils.shaHex(pwd);
-                        user.setPassword(contraseniaEncriptada);
-                        ManageUsuario.update(user, null);
+                        iduser.setPassword(contraseniaEncriptada);
+                        ManageUsuario.update(iduser, null);
 
                         sesion.removeAttribute("iduser");
 
-                        response.sendRedirect("Inicio?msg=okCambio");
+                        response.sendRedirect("usuario/Inicio?msg=okCambio");
                     } else {
                         request.setAttribute("errorconf", "Error al intentar editar la contraseña");
                         RequestDispatcher rd = request.getRequestDispatcher("cambioContrasenia.jsp");

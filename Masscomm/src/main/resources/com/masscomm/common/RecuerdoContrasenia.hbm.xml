@@ -11,6 +11,9 @@
         <property name="codigo" type="string">
             <column name="codigo" length="200" not-null="true"/>
         </property>
+        <property name="fecha" type="java.sql.Timestamp">
+            <column name="fecha" not-null="true"/>
+        </property>
         <many-to-one name="userid" column="userid" class="com.masscomm.common.Usuario" not-null="true"/>
     </class>
 </hibernate-mapping>

@@ -30,8 +30,7 @@ public class PideNuevaContrasenia extends HttpServlet {
             response.sendRedirect("CambioContrasenia?msg=error");
         } else {
             HttpSession sesion = request.getSession();
-            sesion.setAttribute("iduser", idusers.get(0).getId());
-            System.out.println(idusers.get(0).getId());
+            sesion.setAttribute("iduser", idusers.get(0));
             response.sendRedirect("CambioContrasenia");
         }
     }
