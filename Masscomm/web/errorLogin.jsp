@@ -22,6 +22,9 @@
     </head>
     <body>
         <div id="login_container" class="container">
+            <div class="alert alert-danger col-sm-offset-3 col-sm-6" role="alert">
+                <p>El nombre del usuario o la contraseña es incorrecto</p>
+            </div>
             <form class="form-horizontal" name="loginForm" id="loginForm" action="j_security_check" method="post">
                 <div class="form-group">
                     <label for="usr" class="col-sm-4 control-label">Usuario</label>
@@ -37,7 +40,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-sm-offset-4 col-sm-5">
-                        <a href="../RecuerdaContrasenia">He olvidado mi contraseña</a>
+                        <a href="#">No recuerdo mi contraseña</a>
                     </div>
                 </div>
                 <div class="form-group">

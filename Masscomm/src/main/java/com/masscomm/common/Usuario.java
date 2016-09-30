@@ -5,6 +5,8 @@
  */
 package com.masscomm.common;
 
+import java.util.Set;
+
 /**
  *
  * @author pmayor
@@ -13,32 +15,34 @@ public class Usuario implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
-    private String user;
+    private int id;
+    private String username;
     private String password;
-
-    public Usuario(String user, String password) {
-        this.user = user;
-        this.password = password;
-    }
+    private String email;
+    private Set<Rol> rols;
 
     public Usuario() {
     }
 
-    public Integer getId() {
+    public Usuario(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
+
+    public Usuario(String username, String password, String email, Set<Rol> rols) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.rols = rols;
+    }
+    
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
     }
 
     public String getPassword() {
@@ -48,4 +52,29 @@ public class Usuario implements java.io.Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Set<Rol> getRols() {
+        return rols;
+    }
+
+    public void setRols(Set<Rol> rols) {
+        this.rols = rols;
+    }
+
 }

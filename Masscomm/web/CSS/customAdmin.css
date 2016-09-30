@@ -8,9 +8,6 @@ and open the template in the editor.
     Author     : pmayor
 */
 
-#login_container{
-    margin-top: 10%;
-}
-#confuser_container, #recover_container{
+#adduser_container, #listaUsuarios{
     margin-top: 5%;
 }

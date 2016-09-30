@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context path="/Masscomm"/>
+<Context path="/Masscomm">
+    <Realm className="org.apache.catalina.realm.JDBCRealm"
+           connectionName="root" connectionPassword="password"
+           connectionURL="jdbc:mysql://192.168.21.5:3306/masscomm"
+           debug="99"
+           digest="sha1"
+           driverName="com.mysql.jdbc.Driver"
+           name="masscomm"
+           roleNameCol="rolname"
+           userCredCol="password"
+           userNameCol="username"
+           userRoleTable="v_user_role"
+           userTable="v_user_role"/>
+</Context>

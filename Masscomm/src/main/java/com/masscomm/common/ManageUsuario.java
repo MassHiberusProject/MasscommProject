@@ -5,10 +5,10 @@
  */
 package com.masscomm.common;
 
-import com.masscomm.common.Usuario;
 import com.masscomm.persistence.HibernateUtil;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -19,7 +19,7 @@ import org.hibernate.Transaction;
  */
 public class ManageUsuario {
 
-    private static int save(Usuario user) {
+    public static int save(Usuario user) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
@@ -32,32 +32,35 @@ public class ManageUsuario {
             if (tx != null) {
                 tx.rollback();
             }
-            throw e;
         } finally {
             sess.close();
         }
         return ok;
     }
-    private static Object update(Usuario user) {
+
+    public static void update(Usuario user, Set<Rol> rls) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
-        Object ok = null;
         try {
             tx = sess.beginTransaction();
-            ok = sess.merge(user);
+            sess.update(user);
+            if (rls != null) {
+                for (Rol r : rls) {
+                    sess.merge(r);
+                }
+            }
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
                 tx.rollback();
             }
-            throw e;
         } finally {
             sess.close();
         }
-        return ok;
     }
-    private static void delete(Usuario user) {
+
+    public static void delete(Usuario user) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
@@ -69,16 +72,16 @@ public class ManageUsuario {
             if (tx != null) {
                 tx.rollback();
             }
-            throw e;
         } finally {
             sess.close();
         }
     }
-    private static List list() {
+
+    public static List<Usuario> list() {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
-        List users = new ArrayList();
+        List<Usuario> users = new ArrayList();
         try {
             tx = sess.beginTransaction();
             users = sess.createQuery("from Usuario").list();
@@ -87,13 +90,13 @@ public class ManageUsuario {
             if (tx != null) {
                 tx.rollback();
             }
-            throw e;
         } finally {
             sess.close();
         }
         return users;
     }
-    private static Usuario read(int id) {
+
+    public static Usuario read(int id) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
@@ -111,5 +114,159 @@ public class ManageUsuario {
             sess.close();
         }
         return user;
+    }
+
+    public static List<Rol> listRol() {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = null;
+        List<Rol> rols = new ArrayList();
+        try {
+            tx = sess.beginTransaction();
+            rols = sess.createQuery("from Rol").list();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            sess.close();
+        }
+        return rols;
+    }
+
+    public static Rol readRol(int idrol) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = null;
+        Rol rol = new Rol();
+        try {
+            tx = sess.beginTransaction();
+            rol = (Rol) sess.load(Rol.class, idrol);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            sess.close();
+        }
+        return rol;
+    }
+
+    public static boolean existeName(String name) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = null;
+        boolean existe = false;
+        try {
+            tx = sess.beginTransaction();
+            List<Object> dev = sess.createQuery("select id from Usuario where username = :user_name")
+                    .setParameter("user_name", name).list();
+            if (!dev.isEmpty()) {
+                existe = true;
+            }
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            sess.close();
+        }
+        return existe;
+    }
+
+    public static boolean existeEmail(String email) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = null;
+        boolean existe = false;
+        try {
+            tx = sess.beginTransaction();
+            List<Object> dev = sess.createQuery("select id from Usuario where email = :user_mail")
+                    .setParameter("user_mail", email).list();
+            if (!dev.isEmpty()) {
+                existe = true;
+            }
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            sess.close();
+        }
+        return existe;
+    }
+
+    public static List<Usuario> listOneUser(String name) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = null;
+        List<Usuario> users = new ArrayList();
+        try {
+            tx = sess.beginTransaction();
+            users = sess.createQuery("from Usuario where username = :user_name")
+                    .setParameter("user_name", name).list();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            sess.close();
+        }
+        return users;
+    }
+
+    public static boolean existeNameNotme(String name, int id) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = null;
+        boolean existe = false;
+        try {
+            tx = sess.beginTransaction();
+            List<Object> dev = sess.createQuery("select id from Usuario where username = :user_name and id <> :id")
+                    .setParameter("user_name", name)
+                    .setParameter("id", id)
+                    .list();
+            if (!dev.isEmpty()) {
+                existe = true;
+            }
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            sess.close();
+        }
+        return existe;
+    }
+
+    public static boolean existeEmailNotme(String email, int id) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = null;
+        boolean existe = false;
+        try {
+            tx = sess.beginTransaction();
+            List<Object> dev = sess.createQuery("select id from Usuario where email = :user_mail and id <> :id")
+                    .setParameter("user_mail", email)
+                    .setParameter("id", id)
+                    .list();
+            if (!dev.isEmpty()) {
+                existe = true;
+            }
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            sess.close();
+        }
+        return existe;
     }
 }
