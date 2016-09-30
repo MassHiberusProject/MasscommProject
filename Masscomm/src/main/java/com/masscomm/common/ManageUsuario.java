@@ -100,7 +100,7 @@ public class ManageUsuario {
         Usuario user = new Usuario();
         try {
             tx = sess.beginTransaction();
-            user = sess.get(Usuario.class, id);
+            user = (Usuario) sess.get(Usuario.class, id);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
