@@ -5,52 +5,51 @@
  */
 package Servlet;
 
-import com.masscomm.common.ManageCumpleanios;
+import com.masscomm.common.ManageVisitas;
+import com.masscomm.common.Visitas;
+import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.masscomm.common.Cumpleanios;
-import java.io.File;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
 
 /**
  *
- * @author claencina
+ * @author pmayor
  */
-public class EliminarCumpleanios extends HttpServlet {
+public class EliminarVisita extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html;charset=UTF-8");
 
         String id = request.getParameter("id");
         try {
             int ident = Integer.parseInt(id);
-            Cumpleanios c = ManageCumpleanios.read(ident);
-            if (c != null) {
-                String nombreFoto = c.getImagen();
-                ManageCumpleanios.delete(c);
-                Cumpleanios cumpleEmpty = ManageCumpleanios.read(ident);
-                if (cumpleEmpty == null) {
+            Visitas visita = ManageVisitas.read(ident);
+            if (visita != null) {
+                String nombreFoto = visita.getFoto();
+                String nombreLogo = visita.getLogo();
+                ManageVisitas.delete(visita);
+                Visitas visitaEmpty = ManageVisitas.read(ident);
+                if (visitaEmpty == null) {
                     String ruta = "/img";
                     String path = request.getRealPath(ruta);
-                    File f = new File(path + "/" + nombreFoto);
-                    f.delete();
-                    response.sendRedirect("ListaCumpleanios?msg=okDelete");
+                    File f1 = new File(path + "/" + nombreFoto);
+                    File f2 = new File(path + "/" + nombreLogo);
+                    f1.delete();
+                    f2.delete();
+                    response.sendRedirect("ListaVisitas?msg=okDelete");
                 } else {
-                    response.sendRedirect("ListaCumpleanios?msg=err");
+                    response.sendRedirect("ListaVisitas?msg=err");
                 }
             } else {
-                response.sendRedirect("ListaCumpleanios?msg=err");
+                response.sendRedirect("ListaVisitas?msg=err");
             }
         } catch (NumberFormatException e) {
-            response.sendRedirect("ListaCumpleanios?msg=err");
+            response.sendRedirect("ListaVisitas?msg=err");
         }
     }
 

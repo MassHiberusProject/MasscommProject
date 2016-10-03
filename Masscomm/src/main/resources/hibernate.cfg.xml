@@ -15,5 +15,6 @@
         <mapping resource="com/masscomm/common/Fondo.hbm.xml"></mapping>
         <mapping resource="com/masscomm/common/Rol.hbm.xml"></mapping>
         <mapping resource="com/masscomm/common/RecuerdoContrasenia.hbm.xml"></mapping>
+        <mapping resource="com/masscomm/common/Visitas.hbm.xml"></mapping>
     </session-factory>
 </hibernate-configuration>

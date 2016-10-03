@@ -1,7 +1,7 @@
 <%-- 
-    Document   : cumpleanios
-    Created on : 19-sep-2016, 13:17:32
-    Author     : claencina
+    Document   : visitas
+    Created on : 03-oct-2016, 8:56:05
+    Author     : pmayor
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,13 +20,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Lista de usuarios</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Lista de visitas</title>
         <meta name="description" content="Aplicación">
         <meta name="author" content="Hiberus Osaba">
 
         <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+        <link href="${ctx}/CSS/custom.css" rel="stylesheet" media="all" type="text/css">
         <link href="${ctx}/CSS/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
         <script src="${ctx}/JS/jquery-1.12.4.min.js"></script>
         <script src="${ctx}/JS/bootstrap.min.js"></script>
@@ -92,7 +92,7 @@
                     </div>
                 </div>
             </c:if>
-            <a class="btn btn-primary" href="AnadirCumpleanios" role="button" style="float: right">Nuevo cumpleaños</a>
+            <a class="btn btn-primary" href="AnadirVisita" role="button" style="float: right">Nueva visita</a>
             <br><br><br>
 
             <div class="table-responsive">
@@ -104,24 +104,28 @@
                             <th>Nombre</th>
                             <th>Apellidos</th>
                             <th>Empresa</th>
+                            <th>Cargo</th>
                             <th>Fecha</th>
                             <th>Foto</th>
+                            <th>Logo empresa</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach items="${cumpleanios}" var="cumple" varStatus="i"> 
+                        <c:forEach items="${visitas}" var="visita" varStatus="i"> 
                             <tr id="id_tr">
-                                <td hidden="true">${cumple.id} </td>
+                                <td hidden="true">${visita.id} </td>
                                 <td>    
-                                    <a href="<c:url value="EditarCumpleanios"><c:param name="id" value="${cumple.id}"/></c:url>"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <a href="<c:url value="EliminarCumpleanios"><c:param name="id" value="${cumple.id}"/></c:url>"><span class="glyphicon glyphicon-remove"></span></a>
+                                    <a href="<c:url value="EditarVisita"><c:param name="id" value="${visita.id}"/></c:url>"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <a href="<c:url value="EliminarVisita"><c:param name="id" value="${visita.id}"/></c:url>"><span class="glyphicon glyphicon-remove"></span></a>
                                     </td>
-                                    <td>${cumple.nombre} </td>
-                                <td>${cumple.apellidos} </td>
-                                <td>${cumple.empresa} </td>
-                                <td> <fmt:formatDate pattern="dd 'de' MMMM" value="${cumple.fecha}" /></td>
-                                <td><c:if test="${cumple.imagen!=null}"><a target="_blank" href="../img/${cumple.imagen}">Foto</a> </c:if> </td>                          
-                                <td> <input type="checkbox" value="${cumple.id} + ${cumple.fecha}"></td>
+                                    <td>${visita.nombre} </td>
+                                <td>${visita.apellidos} </td>
+                                <td>${visita.empresa} </td>
+                                <td>${visita.cargo} </td>
+                                <td> <fmt:formatDate pattern="dd 'de' MMMM" value="${visita.fecha}" /></td>
+                                <td><c:if test="${visita.foto!=null}"><a target="_blank" href="../img/${visita.foto}">Foto</a> </c:if> </td>
+                                <td><c:if test="${visita.logo!=null}"><a target="_blank" href="../img/${visita.logo}">Logo</a> </c:if> </td> 
+                                <td><input type="checkbox" value="${visita.id} + ${visita.fecha}"></td>
                             </tr>
                         </c:forEach>
                     </tbody>

@@ -5,8 +5,8 @@
         <listener-class>Servlet.BorradorPeticionesContrasenia</listener-class>
     </listener>
     <servlet>
-        <servlet-name>Cumpleanios</servlet-name>
-        <servlet-class>Servlet.Cumpleanios</servlet-class>
+        <servlet-name>ListaCumpleanios</servlet-name>
+        <servlet-class>Servlet.ListaCumpleanios</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EliminarCumpleanios</servlet-name>
@@ -68,9 +68,25 @@
         <servlet-name>CambioContrasenia</servlet-name>
         <servlet-class>Servlet.CambioContrasenia</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListaVisitas</servlet-name>
+        <servlet-class>Servlet.ListaVisitas</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AnadirVisita</servlet-name>
+        <servlet-class>Servlet.AnadirVisita</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EliminarVisita</servlet-name>
+        <servlet-class>Servlet.EliminarVisita</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditarVisita</servlet-name>
+        <servlet-class>Servlet.EditarVisita</servlet-class>
+    </servlet>
     <servlet-mapping>
-        <servlet-name>Cumpleanios</servlet-name>
-        <url-pattern>/usuario/Cumpleanios</url-pattern>
+        <servlet-name>ListaCumpleanios</servlet-name>
+        <url-pattern>/usuario/ListaCumpleanios</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EliminarCumpleanios</servlet-name>
@@ -131,6 +147,22 @@
     <servlet-mapping>
         <servlet-name>CambioContrasenia</servlet-name>
         <url-pattern>/CambioContrasenia</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListaVisitas</servlet-name>
+        <url-pattern>/usuario/ListaVisitas</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AnadirVisita</servlet-name>
+        <url-pattern>/usuario/AnadirVisita</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EliminarVisita</servlet-name>
+        <url-pattern>/usuario/EliminarVisita</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditarVisita</servlet-name>
+        <url-pattern>/usuario/EditarVisita</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,7 +5,8 @@
  */
 package Servlet;
 
-import com.masscomm.common.ManageCumpleanios;
+import com.masscomm.common.ManageVisitas;
+import com.masscomm.common.Visitas;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
@@ -27,32 +28,29 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 /**
  *
- * @author claencina
+ * @author pmayor
  */
-public class AnadirCumpleanios extends HttpServlet {
+public class AnadirVisita extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        java.util.Date fecha = new Date();
-        request.setAttribute("fecha", fecha);
         request.setAttribute("contador", 0);
 
-        RequestDispatcher rd = request.getRequestDispatcher("anadirCumpleanios.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("anadirVisita.jsp");
         rd.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
 
+        response.setContentType("text/html;charset=UTF-8");
         int contador = 0;
 
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-
         if (isMultipart) {
             try {
                 FileItemFactory factory = new DiskFileItemFactory();
@@ -61,7 +59,9 @@ public class AnadirCumpleanios extends HttpServlet {
                 String nombre = null;
                 String apellidos = null;
                 String empresa = null;
+                String cargo = null;
                 FileItem foto = null;
+                FileItem logo = null;
                 String fech = null;
 
                 List<FileItem> items = upload.parseRequest(request);
@@ -69,39 +69,51 @@ public class AnadirCumpleanios extends HttpServlet {
                 for (FileItem item : items) {
                     String campoN = item.getFieldName();
                     if (item.isFormField()) {
-                        if (campoN.equals("nombre")) {
-                            nombre = item.getString("UTF-8");
-                        } else if (campoN.equals("apellidos")) {
-                            apellidos = item.getString("UTF-8");
-                        } else if (campoN.equals("empresa")) {
-                            empresa = item.getString("UTF-8");
-                        } else if (campoN.equals("fecha")) {
-                            fech = item.getString("UTF-8");
+                        switch (campoN) {
+                            case "nombre":
+                                nombre = item.getString("UTF-8");
+                                break;
+                            case "apellidos":
+                                apellidos = item.getString("UTF-8");
+                                break;
+                            case "empresa":
+                                empresa = item.getString("UTF-8");
+                                break;
+                            case "cargo":
+                                cargo = item.getString("UTF-8");
+                                break;
+                            case "fecha":
+                                fech = item.getString("UTF-8");
+                                break;
+                            default:
+                                break;
                         }
                     } else if (campoN.equals("foto") && item.getName() != null && item.getName().trim().length() > 0) {
                         foto = item;
-
+                    } else if (campoN.equals("logo") && item.getName() != null && item.getName().trim().length() > 0) {
+                        logo = item;
                     }
                 }
 
-                com.masscomm.common.Cumpleanios c = new com.masscomm.common.Cumpleanios();
+                Visitas visita = new Visitas();
 
                 request.setAttribute("nombre", nombre);
                 request.setAttribute("apellidos", apellidos);
                 request.setAttribute("empresa", empresa);
+                request.setAttribute("cargo", cargo);
                 SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd");
                 Date fecha = null;
 
-                if (fech!=null && !fech.isEmpty()) {
+                if (fech != null && !fech.isEmpty()) {
                     try {
                         fecha = formato.parse(fech);
                         request.setAttribute("fech", fecha);
-                        c.setFecha(fecha);
+                        visita.setFecha(fecha);
 
                     } catch (ParseException ex) {
                         request.setAttribute("contador", 1);
                         request.setAttribute("error_insert", "La fecha introducida no es correcta");
-                        RequestDispatcher rd = request.getRequestDispatcher("anadirCumpleanios.jsp");
+                        RequestDispatcher rd = request.getRequestDispatcher("anadirVisita.jsp");
                         rd.forward(request, response);
                     }
                 } else {
@@ -120,13 +132,26 @@ public class AnadirCumpleanios extends HttpServlet {
                             && ex.compareToIgnoreCase("jpeg") != 0 && ex.compareToIgnoreCase("bmp") != 0
                             && ex.compareToIgnoreCase("gif") != 0 && ex.compareToIgnoreCase("tiff") != 0) {
                         contador++;
-                        request.setAttribute("error_foto", "El fichero no es una imagen");
+                        request.setAttribute("error_foto", "El fichero correspondiente a la fotografía no es una imagen");
+                    }
+                }
+                if (logo != null) {
+                    int i = logo.getName().lastIndexOf(".");
+                    String ex = "";
+                    if (i != -1) {
+                        ex = logo.getName().substring(i + 1);
+                    }
+                    if (ex.compareToIgnoreCase("jpg") != 0 && ex.compareToIgnoreCase("png") != 0
+                            && ex.compareToIgnoreCase("jpeg") != 0 && ex.compareToIgnoreCase("bmp") != 0
+                            && ex.compareToIgnoreCase("gif") != 0 && ex.compareToIgnoreCase("tiff") != 0) {
+                        contador++;
+                        request.setAttribute("error_logo", "El fichero correspondiente al logotipo no es una imagen");
                     }
                 }
                 if (contador != 0) {
                     request.setAttribute("contador", contador);
 
-                    RequestDispatcher rd = request.getRequestDispatcher("anadirCumpleanios.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("anadirVisita.jsp");
                     rd.forward(request, response);
                 } else {
                     if (foto != null) {
@@ -161,44 +186,77 @@ public class AnadirCumpleanios extends HttpServlet {
                             nom = no;
                         }
                         foto.write(f);
+                        visita.setFoto(nom);
+                    }
+                    if (logo != null) {
+                        String ruta = "/img";
+                        String path = request.getRealPath(ruta);
+                        String nom = "";
+                        String nomF = "";
 
-                        c.setImagen(nom);
+                        nom += logo.getName();
+                        String auxN = nom;
+
+                        File f = new File(path + "/" + nom);
+
+                        int ex = 0;
+                        while (f.exists()) {
+                            ex++;
+                            StringTokenizer st = new StringTokenizer(auxN, ".");
+                            List<String> n = new ArrayList<String>();
+                            String aux;
+                            while (st.hasMoreTokens()) {
+                                aux = st.nextToken();
+                                n.add(aux);
+                            }
+                            String nombreFoto = n.get(0);
+                            String extension = n.get(1);
+
+                            nomF = nombreFoto + ex;
+                            String no = "";
+                            no = nomF + "." + extension;
+
+                            f = new File(path + "/" + no);
+                            nom = no;
+                        }
+                        logo.write(f);
+                        visita.setLogo(nom);
                     }
 
-                    c.setNombre(nombre);
-
+                    visita.setNombre(nombre);
                     if (apellidos != null && !apellidos.isEmpty()) {
-                        c.setApellidos(apellidos);
+                        visita.setApellidos(apellidos);
                     }
                     if (empresa != null && !empresa.isEmpty()) {
-                        c.setEmpresa(empresa);
+                        visita.setEmpresa(empresa);
+                    }
+                    if (cargo != null && !cargo.isEmpty()) {
+                        visita.setCargo(cargo);
                     }
 
-                    int ok = ManageCumpleanios.save(c);
+                    int ok = ManageVisitas.save(visita);
                     if (ok != -1) {
-                        response.sendRedirect("ListaCumpleanios?msg=ok");
+                        response.sendRedirect("ListaVisitas?msg=ok");
                     } else {
                         request.setAttribute("contador", 1);
-                        request.setAttribute("error_insert", "No ha sido posible insertar el nuevo cumpleaños");
-                        RequestDispatcher rd = request.getRequestDispatcher("anadirCumpleanios.jsp");
+                        request.setAttribute("error_insert", "No ha sido posible insertar el nuevo visitante 0");
+                        RequestDispatcher rd = request.getRequestDispatcher("anadirVisita.jsp");
                         rd.forward(request, response);
                     }
                 }
-
             } catch (FileUploadException ex) {
                 request.setAttribute("contador", 1);
-                request.setAttribute("error_insert", "No ha sido posible insertar el nuevo cumpleaños");
-                RequestDispatcher rd = request.getRequestDispatcher("anadirCumpleanios.jsp");
+                request.setAttribute("error_insert", "No ha sido posible insertar el nuevo visitante 1");
+                RequestDispatcher rd = request.getRequestDispatcher("anadirVisita.jsp");
                 rd.forward(request, response);
             } catch (Exception ex) {
                 request.setAttribute("contador", 1);
-                request.setAttribute("error_insert", "No ha sido posible insertar el nuevo cumpleaños");
-                RequestDispatcher rd = request.getRequestDispatcher("anadirCumpleanios.jsp");
+                request.setAttribute("error_insert", "No ha sido posible insertar el nuevo visitante 2");
+                RequestDispatcher rd = request.getRequestDispatcher("anadirVisita.jsp");
                 rd.forward(request, response);
+                ex.printStackTrace();
             }
-
         }
-
     }
 
 }

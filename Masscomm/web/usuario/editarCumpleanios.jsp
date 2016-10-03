@@ -7,16 +7,30 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+    HttpSession misession = (HttpSession) request.getSession();
+    String usuario = (String) misession.getAttribute("username");
+    request.setAttribute("isAdmin", request.isUserInRole("administrador"));
+    if (usuario == null) {
+        request.setAttribute("username", request.getUserPrincipal().getName().toUpperCase());
+    } else {
+        request.setAttribute("username", usuario.toUpperCase());
+    }
+%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="CSS/bootstrap.min.css" type="text/css"/>
+        <title>Añadir cumpleaños</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Aplicación">
+        <meta name="author" content="Hiberus Osaba">
 
-        <script src="JS/bootstrap.min.js"></script>
-        <title>JSP Page</title>  
+        <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+        <link href="${ctx}/CSS/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
+        <script src="${ctx}/JS/jquery-1.12.4.min.js"></script>
+        <script src="${ctx}/JS/bootstrap.min.js"></script>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
         <script>
             $.datepicker.regional['es'] = {

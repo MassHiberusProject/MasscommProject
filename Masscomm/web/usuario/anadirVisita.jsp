@@ -1,7 +1,7 @@
 <%-- 
-    Document   : anadirCumpleanios
-    Created on : 26-sep-2016, 8:43:50
-    Author     : claencina
+    Document   : anadirvisita
+    Created on : 03-oct-2016, 9:58:36
+    Author     : pmayor
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -20,7 +20,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Añadir cumpleaños</title>
+        <title>Añadir visita</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Aplicación">
@@ -37,7 +37,7 @@
         <%@include file="navbar.html" %>
         <div class="row">
             <div class="col-sm-offset-1 col-sm-5">
-                <h4>Añadir nuevo cumpleaños</h4>
+                <h4>Añadir nuevo visitante</h4>
             </div>
         </div>
         <div class="row">
@@ -49,6 +49,9 @@
                                 <c:if test="${error_foto !=null}">
                                     <li><c:out value="${error_foto}"/></li>
                                     </c:if>
+                                    <c:if test="${error_logo !=null}">
+                                    <li><c:out value="${error_logo}"/></li>
+                                    </c:if>
                                     <c:if test="${error_insert !=null}">
                                     <li><c:out value="${error_insert}"/></li>
                                     </c:if>
@@ -56,7 +59,7 @@
                         </div>  
                     </div>
                 </c:if>
-                <form enctype="multipart/form-data" class="form-horizontal" name="login" id="flogin" action="AnadirCumpleanios" method="post">
+                <form enctype="multipart/form-data" class="form-horizontal" name="login" id="flogin" action="AnadirVisita" method="post">
                     <div class="form-group">
                         <label for="inputNombre" class="col-sm-3 control-label">Nombre *</label>
                         <div class="col-sm-6">
@@ -76,11 +79,18 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputFecha" class="col-sm-3 control-label">Fecha *</label>
+                        <label for="inputEmpresa" class="col-sm-3 control-label">Cargo</label>
                         <div class="col-sm-6">
-                            <input required="true" type="date" class="form-control" name="fecha" id="fecha" placeholder="<fmt:formatDate pattern="dd/MM/yyyy" value="${fecha!=null ? fecha : fech}" />" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${f}" />">                   
+                            <input type="text" class="form-control" name="cargo" id="cargo" placeholder="Cargo en la empresa" value="<c:out value="${cargo}"/>">
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="inputFecha" class="col-sm-3 control-label">Fecha *</label>
+                        <div class="col-sm-6">
+                            <input required="true" type="date" class="form-control" name="fecha" id="fecha" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${f}" />">                   
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="inputFoto" class="col-sm-3 control-label">Foto</label>
                         <div class="col-sm-6">
@@ -88,9 +98,15 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="inputFoto" class="col-sm-3 control-label">Logo</label>
+                        <div class="col-sm-6">
+                            <input type="file" name="logo" id="logo" >
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-5">
                             <button type="submit" class="btn btn-primary">Guardar</button>
-                            <a class="btn btn-primary" href="ListaCumpleanios" role="button">Cancelar</a>
+                            <a class="btn btn-primary" href="ListaVisitas" role="button">Cancelar</a>
                         </div>
                     </div>
                 </form>
@@ -98,4 +114,3 @@
         </div>
     </body>
 </html>
-

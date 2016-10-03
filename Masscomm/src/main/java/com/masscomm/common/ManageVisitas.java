@@ -7,7 +7,6 @@ package com.masscomm.common;
 
 import com.masscomm.persistence.HibernateUtil;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,18 +14,18 @@ import org.hibernate.Transaction;
 
 /**
  *
- * @author claencina
+ * @author pmayor
  */
-public class ManageCumpleanios {
+public class ManageVisitas {
 
-    public static int save(Cumpleanios cumpleanios) {
+    public static int save(Visitas visitas) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
         Integer ok = -1;
         try {
             tx = sess.beginTransaction();
-            ok = (Integer) sess.save(cumpleanios);
+            ok = (Integer) sess.save(visitas);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -38,14 +37,14 @@ public class ManageCumpleanios {
         return ok;
     }
 
-    public static Object update(Cumpleanios cumpleanios) {
+    public static Object update(Visitas visitas) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
         Object ok = null;
         try {
             tx = sess.beginTransaction();
-            ok = sess.merge(cumpleanios);
+            ok = sess.merge(visitas);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -57,13 +56,13 @@ public class ManageCumpleanios {
         return ok;
     }
 
-    public static void delete(Cumpleanios cumpleanios) {
+    public static void delete(Visitas visitas) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
         try {
             tx = sess.beginTransaction();
-            sess.delete(cumpleanios);
+            sess.delete(visitas);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -74,14 +73,14 @@ public class ManageCumpleanios {
         }
     }
 
-    public static List<Cumpleanios> list() {
+    public static List<Visitas> list() {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
-        List<Cumpleanios> cumpleanios = new ArrayList();
+        List<Visitas> visitas = new ArrayList();
         try {
             tx = sess.beginTransaction();
-            cumpleanios = sess.createQuery("from Cumpleanios").list();
+            visitas = sess.createQuery("from Visitas").list();
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -90,17 +89,17 @@ public class ManageCumpleanios {
         } finally {
             sess.close();
         }
-        return cumpleanios;
+        return visitas;
     }
 
-    public static Cumpleanios read(int id) {
+    public static Visitas read(int id) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
-        Cumpleanios cumpleanios = new Cumpleanios();
+        Visitas visitas = new Visitas();
         try {
             tx = sess.beginTransaction();
-            cumpleanios = (Cumpleanios) sess.get(Cumpleanios.class, id);
+            visitas = (Visitas) sess.get(Visitas.class, id);
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -109,6 +108,6 @@ public class ManageCumpleanios {
         } finally {
             sess.close();
         }
-        return cumpleanios;
+        return visitas;
     }
 }

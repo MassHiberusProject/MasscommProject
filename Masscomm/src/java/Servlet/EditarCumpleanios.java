@@ -35,13 +35,10 @@ import java.util.StringTokenizer;
  */
 public class EditarCumpleanios extends HttpServlet {
 
-    private int contador;
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        contador = 0;
 
         HttpSession sesion = request.getSession();
 
@@ -55,12 +52,11 @@ public class EditarCumpleanios extends HttpServlet {
         }
 
         sesion.setAttribute("id", idS);
-        Cumpleanios c = new Cumpleanios();
-        c = ManageCumpleanios.read(id);
+        Cumpleanios c = ManageCumpleanios.read(id);
         if (c != null) {
             java.util.Date fecha = new Date();
             request.setAttribute("fecha", fecha);
-            request.setAttribute("contador", contador);
+            request.setAttribute("contador", 0);
 
             request.setAttribute("cumpleanios", c);
 
@@ -76,7 +72,7 @@ public class EditarCumpleanios extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        contador = 0;
+        int contador = 0;
 
         HttpSession sesion = request.getSession();
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
