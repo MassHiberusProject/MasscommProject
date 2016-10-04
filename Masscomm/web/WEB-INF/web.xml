@@ -29,6 +29,10 @@
         <servlet-class>Servlet.AnadirFondo</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>AnadirFondoVisita</servlet-name>
+        <servlet-class>Servlet.AnadirFondoVisita</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AnadirUsuario</servlet-name>
         <servlet-class>Servlet.AnadirUsuario</servlet-class>
     </servlet>
@@ -107,6 +111,10 @@
     <servlet-mapping>
         <servlet-name>AnadirFondo</servlet-name>
         <url-pattern>/usuario/AnadirFondo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AnadirFondoVisita</servlet-name>
+        <url-pattern>/usuario/AnadirFondoVisita</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AnadirUsuario</servlet-name>

@@ -29,7 +29,7 @@ public class ListaVisitas extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         List<Visitas> visitas = ManageVisitas.list();
-        String nameFondo = "";
+        String nameFondo = null;
         List<Fondo> fondos = ManageFondo.list();
         for (Fondo fondo : fondos) {
             if (fondo.getTipo().compareTo("V") == 0) {

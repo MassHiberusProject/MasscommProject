@@ -120,7 +120,7 @@
                                 <td>${cumple.apellidos} </td>
                                 <td>${cumple.empresa} </td>
                                 <td> <fmt:formatDate pattern="dd 'de' MMMM" value="${cumple.fecha}" /></td>
-                                <td><c:if test="${cumple.imagen!=null}"><a target="_blank" href="../img/${cumple.imagen}">Foto</a> </c:if> </td>                          
+                                <td><c:if test="${cumple.imagen!=null}"><a target="_blank" href="${ctx}/img/${cumple.imagen}">Foto</a> </c:if> </td>                          
                                 <td> <input type="checkbox" value="${cumple.id} + ${cumple.fecha}"></td>
                             </tr>
                         </c:forEach>
@@ -142,7 +142,7 @@
                     <div class="form-group">
                         <label for="inputFondo">Fondo</label>
                         <c:if test="${fondo!=null}">
-                            <a target="_blank" href="fondo/${fondo}">Fondo</a>
+                            <a target="_blank" href="${ctx}/fondo/${fondo}">Fondo</a>
                         </c:if> 
                         <input type="file" name="fondo" id="fondo">
                     </div>

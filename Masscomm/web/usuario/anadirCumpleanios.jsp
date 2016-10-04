@@ -78,7 +78,7 @@
                     <div class="form-group">
                         <label for="inputFecha" class="col-sm-3 control-label">Fecha *</label>
                         <div class="col-sm-6">
-                            <input required="true" type="date" class="form-control" name="fecha" id="fecha" placeholder="<fmt:formatDate pattern="dd/MM/yyyy" value="${fecha!=null ? fecha : fech}" />" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${f}" />">                   
+                            <input required="true" type="date" class="form-control" name="fecha" id="fecha" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${f}" />">                   
                         </div>
                     </div>
                     <div class="form-group">

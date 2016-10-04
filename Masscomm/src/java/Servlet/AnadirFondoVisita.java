@@ -8,6 +8,7 @@ package Servlet;
 import com.masscomm.common.Fondo;
 import com.masscomm.common.ManageCumpleanios;
 import com.masscomm.common.ManageFondo;
+import com.masscomm.common.ManageVisitas;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  *
  * @author claencina
  */
-public class AnadirFondo extends HttpServlet {
+public class AnadirFondoVisita extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -69,12 +70,12 @@ public class AnadirFondo extends HttpServlet {
                 }
                 if (contador != 0) {
                     request.setAttribute("contador", contador);
-                    request.setAttribute("cumpleanios", ManageCumpleanios.list());
+                    request.setAttribute("visitas", ManageVisitas.list());
 
                     String nameFondo = "";
                     List<Fondo> fondos = ManageFondo.list();
                     for (Fondo fond : fondos) {
-                        if (fond.getTipo().compareTo("C") == 0) {
+                        if (fond.getTipo().compareTo("V") == 0) {
                             nameFondo = fond.getNombre();
                             break;
                         }
@@ -82,7 +83,7 @@ public class AnadirFondo extends HttpServlet {
 
                     request.setAttribute("fondo", nameFondo);
 
-                    RequestDispatcher rd = request.getRequestDispatcher("cumpleanios.jsp");
+                    RequestDispatcher rd = request.getRequestDispatcher("visitas.jsp");
                     rd.forward(request, response);
                 } else if (fondo != null) {
                     String ruta = "/fondo";
@@ -119,12 +120,12 @@ public class AnadirFondo extends HttpServlet {
 
                     Fondo fon = new Fondo();
                     fon.setNombre(nom);
-                    fon.setTipo("C");
+                    fon.setTipo("V");
 
                     Fondo fondoBD = new Fondo();
                     List<Fondo> fondos = ManageFondo.list();
                     for (int i = 0; i < fondos.size(); i++) {
-                        if (fondos.get(i).getTipo().compareTo("C") == 0) {
+                        if (fondos.get(i).getTipo().compareTo("V") == 0) {
                             fondoBD = fondos.get(i);
                         }
                     }
@@ -137,11 +138,11 @@ public class AnadirFondo extends HttpServlet {
                             f1.delete();
                             ManageFondo.delete(fondoBD);
                         }
-                        response.sendRedirect("ListaCumpleanios");
+                        response.sendRedirect("ListaVisitas");
                     } else {
                         request.setAttribute("contador", 1);
                         request.setAttribute("error_foto", "No es posible añadir el fichero seleccionado para el fondo");
-                        RequestDispatcher rd = request.getRequestDispatcher("cumpleanios.jsp");
+                        RequestDispatcher rd = request.getRequestDispatcher("visitas.jsp");
                         rd.forward(request, response);
                     }
                 }
@@ -149,12 +150,12 @@ public class AnadirFondo extends HttpServlet {
             } catch (FileUploadException ex) {
                 request.setAttribute("contador", 1);
                 request.setAttribute("error_foto", "No es posible añadir el fichero seleccionado para el fondo");
-                RequestDispatcher rd = request.getRequestDispatcher("cumpleanios.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("visitas.jsp");
                 rd.forward(request, response);
             } catch (Exception ex) {
                 request.setAttribute("contador", 1);
                 request.setAttribute("error_foto", "No es posible añadir el fichero seleccionado para el fondo");
-                RequestDispatcher rd = request.getRequestDispatcher("cumpleanios.jsp");
+                RequestDispatcher rd = request.getRequestDispatcher("visitas.jsp");
                 rd.forward(request, response);
             }
         }

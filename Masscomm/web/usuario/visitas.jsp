@@ -28,8 +28,11 @@
         <c:set var="ctx" value="${pageContext.request.contextPath}"/>
         <link href="${ctx}/CSS/custom.css" rel="stylesheet" media="all" type="text/css">
         <link href="${ctx}/CSS/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
-        <script src="${ctx}/JS/jquery-1.12.4.min.js"></script>
+        <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" media="all" type="text/css">
+        
+        <script src="//code.jquery.com/jquery-1.12.3.js"></script>
         <script src="${ctx}/JS/bootstrap.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 var cont = 0;
@@ -77,7 +80,10 @@
                 });
                 function rss(data, msg, resp) {
                     alert("llega");
-                }
+                };
+                
+                $('#tables').DataTable();
+                alert("pasa");
             });
 
         </script>
@@ -96,7 +102,7 @@
             <br><br><br>
 
             <div class="table-responsive">
-                <table class="table table-hover">
+                <table id="tables" class="table table-hover">
                     <thead>
                         <tr>
                             <th hidden="true">id</th>
@@ -123,8 +129,8 @@
                                 <td>${visita.empresa} </td>
                                 <td>${visita.cargo} </td>
                                 <td> <fmt:formatDate pattern="dd 'de' MMMM" value="${visita.fecha}" /></td>
-                                <td><c:if test="${visita.foto!=null}"><a target="_blank" href="../img/${visita.foto}">Foto</a> </c:if> </td>
-                                <td><c:if test="${visita.logo!=null}"><a target="_blank" href="../img/${visita.logo}">Logo</a> </c:if> </td> 
+                                <td><c:if test="${visita.foto!=null}"><a target="_blank" href="${ctx}/img/${visita.foto}">Foto</a> </c:if> </td>
+                                <td><c:if test="${visita.logo!=null}"><a target="_blank" href="${ctx}/img/${visita.logo}">Logo</a> </c:if> </td> 
                                 <td><input type="checkbox" value="${visita.id} + ${visita.fecha}"></td>
                             </tr>
                         </c:forEach>
@@ -142,11 +148,11 @@
                         ${error_foto}
                     </div>  
                 </c:if>
-                <form enctype="multipart/form-data" class="form-horizontal" name="login" id="flogin" action="AnadirFondo" method="post" style="margin-left: 15px;">
+                <form enctype="multipart/form-data" class="form-horizontal" name="login" id="flogin" action="AnadirFondoVisita" method="post">
                     <div class="form-group">
                         <label for="inputFondo">Fondo</label>
                         <c:if test="${fondo!=null}">
-                            <a target="_blank" href="fondo/${fondo}">Fondo</a>
+                            <a target="_blank" href="${ctx}/fondo/${fondo}">Fondo</a>
                         </c:if> 
                         <input type="file" name="fondo" id="fondo">
                     </div>

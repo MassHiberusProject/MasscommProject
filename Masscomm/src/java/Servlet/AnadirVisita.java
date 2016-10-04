@@ -239,22 +239,21 @@ public class AnadirVisita extends HttpServlet {
                         response.sendRedirect("ListaVisitas?msg=ok");
                     } else {
                         request.setAttribute("contador", 1);
-                        request.setAttribute("error_insert", "No ha sido posible insertar el nuevo visitante 0");
+                        request.setAttribute("error_insert", "No ha sido posible insertar la nueva visita");
                         RequestDispatcher rd = request.getRequestDispatcher("anadirVisita.jsp");
                         rd.forward(request, response);
                     }
                 }
             } catch (FileUploadException ex) {
                 request.setAttribute("contador", 1);
-                request.setAttribute("error_insert", "No ha sido posible insertar el nuevo visitante 1");
+                request.setAttribute("error_insert", "No ha sido posible insertar la nueva visita");
                 RequestDispatcher rd = request.getRequestDispatcher("anadirVisita.jsp");
                 rd.forward(request, response);
             } catch (Exception ex) {
                 request.setAttribute("contador", 1);
-                request.setAttribute("error_insert", "No ha sido posible insertar el nuevo visitante 2");
+                request.setAttribute("error_insert", "No ha sido posible insertar la nueva visita");
                 RequestDispatcher rd = request.getRequestDispatcher("anadirVisita.jsp");
                 rd.forward(request, response);
-                ex.printStackTrace();
             }
         }
     }

@@ -5,6 +5,7 @@
  */
 package Servlet;
 
+import com.masscomm.common.Cumpleanios;
 import com.masscomm.common.ManageCumpleanios;
 import java.io.File;
 import java.io.IOException;
@@ -36,8 +37,6 @@ public class AnadirCumpleanios extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        java.util.Date fecha = new Date();
-        request.setAttribute("fecha", fecha);
         request.setAttribute("contador", 0);
 
         RequestDispatcher rd = request.getRequestDispatcher("anadirCumpleanios.jsp");
@@ -84,7 +83,7 @@ public class AnadirCumpleanios extends HttpServlet {
                     }
                 }
 
-                com.masscomm.common.Cumpleanios c = new com.masscomm.common.Cumpleanios();
+                Cumpleanios c = new Cumpleanios();
 
                 request.setAttribute("nombre", nombre);
                 request.setAttribute("apellidos", apellidos);
