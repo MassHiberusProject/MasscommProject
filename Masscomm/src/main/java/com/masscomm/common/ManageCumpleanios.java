@@ -111,4 +111,25 @@ public class ManageCumpleanios {
         }
         return cumpleanios;
     }
+
+    public static List<Cumpleanios> listDate(Date now) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = null;
+        List<Cumpleanios> cumpleanios = new ArrayList();
+        try {
+            tx = sess.beginTransaction();
+            cumpleanios = sess.createQuery("from Cumpleanios where fecha = :fecha")
+                    .setParameter("fecha", now)
+                    .list();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            sess.close();
+        }
+        return cumpleanios;
+    }
 }

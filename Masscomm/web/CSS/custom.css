@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : pmayor
 */
 
-#login_container{
+#login_container, #error_container{
     margin-top: 10%;
 }
 #confuser_container, #recover_container{

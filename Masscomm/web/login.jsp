@@ -13,7 +13,7 @@
         <title>Inicio de sesión</title>
         <meta name="description" content="Aplicación">
         <meta name="author" content="Hiberus Osaba">
-        
+
         <c:set var="ctx" value="${pageContext.request.contextPath}"/>
         <link href="${ctx}/CSS/custom.css" rel="stylesheet" media="all" type="text/css">
         <link href="${ctx}/CSS/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">

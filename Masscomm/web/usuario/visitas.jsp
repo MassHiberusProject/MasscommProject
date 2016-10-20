@@ -28,62 +28,39 @@
         <c:set var="ctx" value="${pageContext.request.contextPath}"/>
         <link href="${ctx}/CSS/custom.css" rel="stylesheet" media="all" type="text/css">
         <link href="${ctx}/CSS/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
-        <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" media="all" type="text/css">
-        
-        <script src="//code.jquery.com/jquery-1.12.3.js"></script>
+        <link href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" media="all" type="text/css">
+
+        <script src="${ctx}/JS/jquery-1.12.4.min.js"></script>
         <script src="${ctx}/JS/bootstrap.min.js"></script>
-        <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.11/js/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="${ctx}/JS/jquery.dataTables.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
-                var cont = 0;
-                var cod = "";
-                var fech = "";
-                var d = new Date();
-                var codigos = [];
-
-                $("#bt_rss").click(function () {
-                    $("#id_tr input").each(function (index)
-                    {
-                        if ($(this).is(':checked')) {
-                            cod = $(this).val();
-                            var codigo = cod.split("+");
-                            cont++;
-                            codigos.push(codigo[0]);
+                $('#tables').DataTable({
+                    "language": {
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron resultados",
+                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+                        "sInfo": "Mostrando del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Buscar:",
+                        "sUrl": "",
+                        "sInfoThousands": ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                         }
-                    })
-                    if (cont == 0)
-                    {
-                        $("#id_tr input").each(function (index)
-                        {
-                            cod = $(this).val();
-                            var codi = cod.split("+");
-                            var codigo = codi[0];
-                            var fech = codi[1]
-                            var fec = fech.split("-");
-
-                            var dia = fec[2];
-                            var mes = fec[1];
-
-                            if (dia == d.getDate() && mes == (d.getMonth() + 1)) {
-                                codigos.push(codigo);
-                            }
-                        })
                     }
-                    $.ajax("GenerarRSS", {
-                        data: {'ids': codigos.toLocaleString()},
-                        dataType: 'json',
-                        success: rss,
-                        error: function (resp, msg, ex) {
-                            alert("Error (" + resp.status + "):" + msg);
-                        }
-                    });
                 });
-                function rss(data, msg, resp) {
-                    alert("llega");
-                };
-                
-                $('#tables').DataTable();
-                alert("pasa");
             });
 
         </script>
@@ -113,12 +90,12 @@
                             <th>Cargo</th>
                             <th>Fecha</th>
                             <th>Foto</th>
-                            <th>Logo empresa</th>
+                            <th>Logo</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${visitas}" var="visita" varStatus="i"> 
-                            <tr id="id_tr">
+                            <tr>
                                 <td hidden="true">${visita.id} </td>
                                 <td>    
                                     <a href="<c:url value="EditarVisita"><c:param name="id" value="${visita.id}"/></c:url>"><span class="glyphicon glyphicon-pencil"></span></a>
@@ -130,14 +107,12 @@
                                 <td>${visita.cargo} </td>
                                 <td> <fmt:formatDate pattern="dd 'de' MMMM" value="${visita.fecha}" /></td>
                                 <td><c:if test="${visita.foto!=null}"><a target="_blank" href="${ctx}/img/${visita.foto}">Foto</a> </c:if> </td>
-                                <td><c:if test="${visita.logo!=null}"><a target="_blank" href="${ctx}/img/${visita.logo}">Logo</a> </c:if> </td> 
-                                <td><input type="checkbox" value="${visita.id} + ${visita.fecha}"></td>
-                            </tr>
+                                <td><c:if test="${visita.logo!=null}"><a target="_blank" href="${ctx}/img/${visita.logo}">Logo</a> </c:if> </td>
+                                </tr>
                         </c:forEach>
                     </tbody>
                 </table>
             </div>
-            <a id="bt_rss" class="btn btn-primary" href="" role="button">Generar RSS</a>
             <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" <c:if test="${error_foto!=null}">aria-expanded="true"</c:if> <c:if test="${error_foto!=null}">aria-expanded="false"</c:if>aria-controls="collapseExample">
                     Añadir fondo
                 </a>

@@ -15,6 +15,7 @@
     } else {
         request.setAttribute("username", usuario.toUpperCase());
     }
+    System.out.println(request.getRequestURL());
 %>
 <!DOCTYPE html>
 <html>
