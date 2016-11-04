@@ -2,7 +2,7 @@
 <Context path="/Masscomm">
     <Realm className="org.apache.catalina.realm.JDBCRealm"
            connectionName="root" connectionPassword="password"
-           connectionURL="jdbc:mysql://192.168.21.5:3306/masscomm"
+           connectionURL="jdbc:mysql://192.168.21.8:3306/masscomm"
            debug="99"
            digest="sha1"
            driverName="com.mysql.jdbc.Driver"

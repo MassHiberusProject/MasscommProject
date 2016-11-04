@@ -112,15 +112,17 @@ public class ManageCumpleanios {
         return cumpleanios;
     }
 
-    public static List<Cumpleanios> listDate(Date now) {
+    public static List<Cumpleanios> listDate(String dia, String mes) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
         List<Cumpleanios> cumpleanios = new ArrayList();
         try {
             tx = sess.beginTransaction();
-            cumpleanios = sess.createQuery("from Cumpleanios where fecha = :fecha")
-                    .setParameter("fecha", now)
+            cumpleanios = (List<Cumpleanios>) sess.createSQLQuery("select * FROM Cumpleanios where DAY( fecha ) = :dia and MONTH(fecha) = :mes")
+                    .addEntity(Cumpleanios.class)
+                    .setParameter("mes", mes)
+                    .setParameter("dia", dia)
                     .list();
             tx.commit();
         } catch (Exception e) {
