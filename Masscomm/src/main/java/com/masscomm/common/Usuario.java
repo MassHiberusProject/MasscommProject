@@ -5,6 +5,7 @@
  */
 package com.masscomm.common;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -70,7 +71,7 @@ public class Usuario implements java.io.Serializable {
     }
 
     public Set<Rol> getRols() {
-        return rols;
+        return this.rols;
     }
 
     public void setRols(Set<Rol> rols) {

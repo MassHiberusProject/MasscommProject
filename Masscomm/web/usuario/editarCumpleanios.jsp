@@ -34,7 +34,7 @@
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
     </head>
     <body>
-        <%@include file="navbar.html" %>
+        <%@include file="navbarCumpleanios.html" %>
         <div class="row">
             <div class="col-sm-offset-1 col-sm-5">
                 <h4>Editar cumpleaños</h4>
@@ -78,21 +78,21 @@
                     <div class="form-group">
                         <label for="inputFecha" class="col-sm-3 control-label">Fecha *</label>
                         <div class="col-sm-6">
-                            <input required="true" type="date" class="form-control" name="fecha" id="fecha" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${cumpleanios.fecha!=null ? cumpleanios.fecha : fech}" />">                   
+                            <input required="true" type="date" class="form-control" name="fecha" id="fecha" value="<fmt:formatDate pattern="yyyy-MM-dd" value="${cumpleanios.fecha!=null ? cumpleanios.fecha : fech}" />">                  
                         </div>              
                     </div>
                     <div class="form-group">
                         <label for="inputFoto" class="col-sm-3 control-label">Foto</label>
-                        <c:if test="${cumpleanios.imagen!=null}">
-                            <a target="_blank" href="img/${cumpleanios.imagen}">Foto</a>
-                        </c:if> 
-                        <c:if test="${foto_id!=null}">
-                            <a target="_blank" href="img/${foto_id}">Foto</a>
-                        </c:if>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <input type="file" name="foto" id="foto">
                         </div>
-                    </div>
+                        <c:if test="${cumpleanios.imagen!=null}">
+                            <a class="col-sm-2 text-right" target="_blank" href="${ctx}/img/${cumpleanios.imagen}"><span class="glyphicon glyphicon-picture"></span> Foto actual</a>
+                        </c:if> 
+                        <c:if test="${foto_id!=null}">
+                            <a class="col-sm-2 text-right" target="_blank" href="${ctx}/img/${foto_id}"><span class="glyphicon glyphicon-picture"></span> Foto actual</a>
+                        </c:if>
+                    </div>                       
                     <div class="form-group">
                         <div class="col-sm-offset-3 col-sm-5">
                             <button type="submit" class="btn btn-primary">Modificar</button>

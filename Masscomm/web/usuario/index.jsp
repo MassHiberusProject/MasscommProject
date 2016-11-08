@@ -32,7 +32,7 @@
         <script src="${ctx}/JS/bootstrap.min.js"></script>
     </head>
     <body>
-        <%@include file="navbar.html" %>
+        <%@include file="navbarInicio.html" %>
         <div class="container">
             <c:if test="${msg!=null}">
                 <div class="row">

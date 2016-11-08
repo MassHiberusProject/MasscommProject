@@ -31,7 +31,7 @@
         <script src="${ctx}/JS/bootstrap.min.js"></script>
     </head>
     <body>
-        <%@include file="navbar.html" %>
+        <%@include file="navbarInicio.html" %>
         <div class="row">
             <div class="col-sm-offset-1 col-sm-5">
                 <h4>Configurar cuenta</h4>

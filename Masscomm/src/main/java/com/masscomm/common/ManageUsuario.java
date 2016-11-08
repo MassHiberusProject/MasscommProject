@@ -38,18 +38,13 @@ public class ManageUsuario {
         return ok;
     }
 
-    public static void update(Usuario user, Set<Rol> rls) {
+    public static void update(Usuario user) {
         SessionFactory factory = HibernateUtil.getSessionFactory();
         Session sess = factory.openSession();
         Transaction tx = null;
         try {
             tx = sess.beginTransaction();
             sess.update(user);
-            if (rls != null) {
-                for (Rol r : rls) {
-                    sess.merge(r);
-                }
-            }
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {
@@ -123,6 +118,25 @@ public class ManageUsuario {
         try {
             tx = sess.beginTransaction();
             rols = sess.createQuery("from Rol").list();
+            tx.commit();
+        } catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            sess.close();
+        }
+        return rols;
+    }
+    
+    public static List<Rol> listRolUser(int id) {
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = null;
+        List<Rol> rols = new ArrayList();
+        try {
+            tx = sess.beginTransaction();
+            rols = sess.createQuery("select r from Rol r join r.usuarios u where u.id=:id").setParameter("id", id).list();
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {

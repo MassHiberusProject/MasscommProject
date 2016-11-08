@@ -42,10 +42,7 @@ public class EditarCumpleanios extends HttpServlet {
             int ident = Integer.parseInt(id);
             Cumpleanios c = ManageCumpleanios.read(ident);
             if (c != null) {
-                java.util.Date fecha = new Date();
-                request.setAttribute("fecha", fecha);
                 request.setAttribute("contador", 0);
-
                 request.setAttribute("cumpleanios", c);
             } else {
                 request.setAttribute("error", "Error al intentar editar el cumpleaños");

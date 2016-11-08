@@ -55,7 +55,7 @@
         </script>
     </head>
     <body>
-        <%@include file="navbar.html" %>
+        <%@include file="navbarListaUsuairos.html" %>
         <div class="row">
             <div class="col-sm-offset-1 col-sm-5">
                 <h4>Lista de usuarios</h4>

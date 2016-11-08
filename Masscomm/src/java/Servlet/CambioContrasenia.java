@@ -56,7 +56,7 @@ public class CambioContrasenia extends HttpServlet {
                     if (iduser != null) {
                         String contraseniaEncriptada = DigestUtils.shaHex(pwd);
                         iduser.setPassword(contraseniaEncriptada);
-                        ManageUsuario.update(iduser, null);
+                        ManageUsuario.update(iduser);
 
                         sesion.removeAttribute("iduser");
 

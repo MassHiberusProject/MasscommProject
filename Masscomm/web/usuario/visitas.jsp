@@ -66,7 +66,7 @@
         </script>
     </head>
     <body>
-        <%@include file="navbar.html" %>
+        <%@include file="navbarVisitas.html" %>
         <div class="container">
             <c:if test="${msg !=null}">
                 <div class="row">

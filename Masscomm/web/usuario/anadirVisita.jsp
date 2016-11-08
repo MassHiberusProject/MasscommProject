@@ -34,7 +34,7 @@
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
     </head>
     <body>
-        <%@include file="navbar.html" %>
+        <%@include file="navbarVisitas.html" %>
         <div class="row">
             <div class="col-sm-offset-1 col-sm-5">
                 <h4>Añadir nuevo visitante</h4>

@@ -20,19 +20,19 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Lista de usuarios</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Lista de cumpleaños</title>
         <meta name="description" content="Aplicación">
         <meta name="author" content="Hiberus Osaba">
 
         <c:set var="ctx" value="${pageContext.request.contextPath}"/>
+        <link href="${ctx}/CSS/custom.css" rel="stylesheet" media="all" type="text/css">
         <link href="${ctx}/CSS/bootstrap.min.css" rel="stylesheet" media="all" type="text/css">
         <link href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet" media="all" type="text/css">
 
         <script src="${ctx}/JS/jquery-1.12.4.min.js"></script>
         <script src="${ctx}/JS/bootstrap.min.js"></script>
-        <script type="text/javascript" src="${ctx}/JS/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="${ctx}/JS/jquery.dataTables.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#tables').DataTable({
@@ -66,7 +66,7 @@
         </script>
     </head>
     <body>
-        <%@include file="navbar.html" %>
+        <%@include file="navbarCumpleanios.html" %>
         <div class="container">
             <c:if test="${msg !=null}">
                 <div class="row">
@@ -119,7 +119,7 @@
                         ${error_foto}
                     </div>  
                 </c:if>
-                <form enctype="multipart/form-data" class="form-horizontal" name="login" id="flogin" action="AnadirFondo" method="post" style="margin-left: 15px;">
+                <form enctype="multipart/form-data" class="form-horizontal" name="login" id="flogin" action="AnadirFondoVisita" method="post">
                     <div class="form-group">
                         <label for="inputFondo">Fondo</label>
                         <c:if test="${fondo!=null}">

@@ -110,4 +110,27 @@ public class ManageVisitas {
         }
         return visitas;
     }
+    
+    public static List<Visitas> listDate (String dia, String mes){
+        SessionFactory factory = HibernateUtil.getSessionFactory();
+        Session sess = factory.openSession();
+        Transaction tx = null;
+        
+        List<Visitas> visitas = new ArrayList();
+        try{
+            tx = sess.beginTransaction();
+            visitas = (List<Visitas>) sess.createSQLQuery("select * FROM Visitas where DAY( fecha ) = :dia and MONTH(fecha) = :mes")
+                    .addEntity(Visitas.class)
+                    .setParameter("mes", mes)
+                    .setParameter("dia", dia)
+                    .list();
+        }catch (Exception e) {
+            if (tx != null) {
+                tx.rollback();
+            }
+        } finally {
+            sess.close();
+        }
+        return visitas;
+    }
 }

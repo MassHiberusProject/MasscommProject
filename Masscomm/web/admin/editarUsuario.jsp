@@ -21,7 +21,7 @@
         <script src="${ctx}/JS/bootstrap.min.js"></script>
     </head>
     <body>
-        <%@include file="navbar.html" %>
+        <%@include file="navbarListaUsuairos.html" %>
         <div class="row">
             <div class="col-sm-offset-1 col-sm-5">
                 <h4>Editar usuario</h4>

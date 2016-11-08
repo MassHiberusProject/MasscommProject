@@ -11,7 +11,7 @@
         <property name="rolname" type="string">
             <column name="rolname" length="30" not-null="true" unique="true" />
         </property>
-        <set name="usuarios" table="UsuarioRol" inverse="false" lazy="true" fetch="select">
+        <set name="usuarios" table="UsuarioRol" inverse="true">
             <key>
                 <column name="rol_id" not-null="true" />
             </key>

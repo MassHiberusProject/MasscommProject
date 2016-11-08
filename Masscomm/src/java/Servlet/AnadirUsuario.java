@@ -9,6 +9,8 @@ import com.masscomm.common.ManageUsuario;
 import com.masscomm.common.Rol;
 import com.masscomm.common.Usuario;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -61,17 +63,19 @@ public class AnadirUsuario extends HttpServlet {
 
             Usuario user = new Usuario(usuario, contraseniaEncriptada, mail);
             Rol role = new Rol();
+            Set<Rol> roles = new HashSet<Rol>();
             for (String r : rol) {
                 try {
                     int id = Integer.parseInt(r);
-                    role = ManageUsuario.readRol(id);
-                    user.getRols().add(role);
+                    role = ManageUsuario.readRol(id);                    
+                    roles.add(role);                                       
                 } catch (NumberFormatException e) {
                     request.setAttribute("error", "Error al intentar añadir el usuario");
                     RequestDispatcher rd = request.getRequestDispatcher("anadirUsuario.jsp");
                     rd.forward(request, response);
                 }
             }
+            user.setRols(roles); 
             int ok = ManageUsuario.save(user);
             if (ok != -1) {
                 response.sendRedirect("ListaUsuarios?msg=ok");

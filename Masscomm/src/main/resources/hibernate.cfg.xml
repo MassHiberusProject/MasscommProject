@@ -10,6 +10,7 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.connection.password">password</property>
         <property name="hibernate.enable_lazy_load_no_trans">true</property>
+        <property name="hibernate.show_sql">true</property>
         <mapping resource="com/masscomm/common/Usuario.hbm.xml"></mapping>
         <mapping resource="com/masscomm/common/Cumpleanios.hbm.xml"></mapping>
         <mapping resource="com/masscomm/common/Fondo.hbm.xml"></mapping>

@@ -9,6 +9,7 @@ import com.masscomm.common.ManageUsuario;
 import com.masscomm.common.Rol;
 import com.masscomm.common.Usuario;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -34,8 +35,8 @@ public class EditarUsuario extends HttpServlet {
             int id = Integer.parseInt(name);
             Usuario user = ManageUsuario.read(id);
             if (user != null) {
-                request.setAttribute("rols", ManageUsuario.listRol());
-                request.setAttribute("roles", user.getRols());
+                request.setAttribute("rols", ManageUsuario.listRol());                
+                request.setAttribute("roles", ManageUsuario.listRolUser(id));
                 request.setAttribute("usuario", user);
             } else {
                 request.setAttribute("error", "Error al intentar editar el usuario");
@@ -100,13 +101,12 @@ public class EditarUsuario extends HttpServlet {
                         String contraseniaEncriptada = DigestUtils.shaHex(contrasenia);
                         user.setPassword(contraseniaEncriptada);
                     }
-                    Rol role = new Rol();
                     Set <Rol> rls=new HashSet<Rol>();
+                    Rol role=new Rol();
                     for (String r : rol) {
                         try {
                             int idRol = Integer.parseInt(r);
-                            role = ManageUsuario.readRol(idRol);
-                            role.getUsuarios().add(user);
+                            role = ManageUsuario.readRol(idRol); 
                             rls.add(role);
                         } catch (NumberFormatException e) {
                             request.setAttribute("error", "Error al intentar añadir el usuario");
@@ -114,7 +114,8 @@ public class EditarUsuario extends HttpServlet {
                             rd.forward(request, response);
                         }
                     }
-                    ManageUsuario.update(user, rls);
+                    user.setRols(rls);
+                    ManageUsuario.update(user);
                     response.sendRedirect("ListaUsuarios?msg=okEdit");
                 } else {
                     request.setAttribute("errorconf", "Error al intentar editar el usuario");

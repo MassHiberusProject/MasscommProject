@@ -25,6 +25,10 @@
         <servlet-class>Servlet.GenerarRSS</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>GenerarRSSVisitas</servlet-name>
+        <servlet-class>Servlet.GenerarRSSVisitas</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AnadirFondo</servlet-name>
         <servlet-class>Servlet.AnadirFondo</servlet-class>
     </servlet>
@@ -107,6 +111,10 @@
     <servlet-mapping>
         <servlet-name>GenerarRSS</servlet-name>
         <url-pattern>/GenerarRSS</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>GenerarRSSVisitas</servlet-name>
+        <url-pattern>/GenerarRSSVisitas</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AnadirFondo</servlet-name>
@@ -201,6 +209,7 @@
         </web-resource-collection>
         <auth-constraint>
             <role-name>usuario</role-name>
+            <role-name>administrador</role-name>
         </auth-constraint>
     </security-constraint>
     <login-config>
