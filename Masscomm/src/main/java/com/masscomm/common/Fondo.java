@@ -5,10 +5,6 @@
  */
 package com.masscomm.common;
 
-/**
- *
- * @author claencina
- */
 public class Fondo implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;

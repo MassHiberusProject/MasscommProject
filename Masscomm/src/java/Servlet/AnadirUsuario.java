@@ -18,10 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.codec.digest.DigestUtils;
 
-/**
- *
- * @author pmayor
- */
 public class AnadirUsuario extends HttpServlet {
 
     @Override

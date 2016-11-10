@@ -1,8 +1,3 @@
-<%-- 
-    Document   : editarCumpleanios
-    Created on : 20-sep-2016, 12:48:30
-    Author     : claencina
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

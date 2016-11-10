@@ -13,10 +13,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-/**
- *
- * @author pmayor
- */
 public class ManageUsuario {
 
     public static int save(Usuario user) {

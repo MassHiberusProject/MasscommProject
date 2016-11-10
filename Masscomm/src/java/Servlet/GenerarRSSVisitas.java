@@ -27,10 +27,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-/**
- *
- * @author claencina
- */
 public class GenerarRSSVisitas extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

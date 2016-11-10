@@ -12,10 +12,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-/**
- *
- * @author pmayor
- */
 public class ManageVisitas {
 
     public static int save(Visitas visitas) {

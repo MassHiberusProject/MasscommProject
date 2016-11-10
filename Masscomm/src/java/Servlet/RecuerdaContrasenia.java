@@ -28,10 +28,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import nl.captcha.Captcha;
 
-/**
- *
- * @author pmayor
- */
 public class RecuerdaContrasenia extends HttpServlet {
 
     @Override
@@ -76,18 +72,13 @@ public class RecuerdaContrasenia extends HttpServlet {
                 if (ok != -1) {
                     String urreles = "http://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/PideNuevaContrasenia?cc=" + cod;
                     
-                    Properties props = new Properties();
-                    props.setProperty("mail.smtp.host", "smtp.unirioja.es");
-                    props.setProperty("mail.smtp.starttls.enable", "true");
-                    props.setProperty("mail.smtp.port", "587");
-                    props.setProperty("mail.smtp.user", "pamayor@unirioja.es");
-                    props.setProperty("mail.smtp.auth", "true");
-
+                    Properties props = new PropertiesMail().getProperties();     
+                    
                     Session session = Session.getDefaultInstance(props);
                     session.setDebug(true);
                     try {
                         MimeMessage message = new MimeMessage(session);
-                        message.setFrom(new InternetAddress("pamayor@unirioja.es"));
+                        message.setFrom(new InternetAddress(props.getProperty("mail.smtp.user")));
                         message.addRecipient(Message.RecipientType.TO, new InternetAddress(usuarios.get(0).getEmail()));
                         message.setSubject("Cambio contrasenia");
                         message.setText("Usa el siguiente enlace para acceder a una página donde podrás cambiar tu contraseña: \n" + urreles,
@@ -95,7 +86,7 @@ public class RecuerdaContrasenia extends HttpServlet {
                                 "html");
 
                         Transport t = session.getTransport("smtp");
-                        t.connect("pamayor@unirioja.es","e9d9nmG.Mm");
+                        t.connect(props.getProperty("mail.smtp.user"),props.getProperty("mail.smtp.password"));
                         t.sendMessage(message,message.getAllRecipients());
                         t.close();
                         

@@ -7,10 +7,6 @@ package com.masscomm.common;
 
 import java.sql.Timestamp;
 
-/**
- *
- * @author pmayor
- */
 public class RecuerdoContrasenia implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;

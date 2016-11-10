@@ -14,10 +14,6 @@ import java.util.logging.Logger;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
-/**
- *
- * @author pmayor
- */
 public class BorradorPeticionesContrasenia implements ServletContextListener {
 
     private ScheduledExecutorService planificador;

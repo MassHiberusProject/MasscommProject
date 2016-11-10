@@ -15,10 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author pmayor
- */
 public class PideNuevaContrasenia extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

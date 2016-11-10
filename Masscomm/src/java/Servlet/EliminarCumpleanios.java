@@ -17,10 +17,6 @@ import java.io.File;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 
-/**
- *
- * @author claencina
- */
 public class EliminarCumpleanios extends HttpServlet {
 
     @Override

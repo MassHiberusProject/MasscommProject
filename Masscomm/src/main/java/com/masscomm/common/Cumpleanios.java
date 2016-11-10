@@ -7,10 +7,6 @@ package com.masscomm.common;
 
 import java.util.Date;
 
-/**
- *
- * @author claencina
- */
 public class Cumpleanios implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;

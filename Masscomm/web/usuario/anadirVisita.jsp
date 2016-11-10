@@ -1,8 +1,3 @@
-<%-- 
-    Document   : anadirvisita
-    Created on : 03-oct-2016, 9:58:36
-    Author     : pmayor
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

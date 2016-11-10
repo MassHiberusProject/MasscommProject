@@ -27,10 +27,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-/**
- *
- * @author claencina
- */
 public class GenerarRSS extends HttpServlet {
 
     @Override
@@ -56,7 +52,7 @@ public class GenerarRSS extends HttpServlet {
             int puerto = request.getServerPort();
             String rutaCumple = "/img/";
             String rutafondoCumple = "/fondo/";
-            String path = request.getContextPath();
+            String path = request.getContextPath();            
 
             Element root = (Element) document.createElement("cumpleanios");
             document.appendChild(root);

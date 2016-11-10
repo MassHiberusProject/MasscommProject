@@ -9,10 +9,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-/**
- *
- * @author pmayor
- */
 public class Rol implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;

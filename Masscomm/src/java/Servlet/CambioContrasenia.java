@@ -16,10 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.codec.digest.DigestUtils;
 
-/**
- *
- * @author pmayor
- */
 public class CambioContrasenia extends HttpServlet {
 
     @Override

@@ -18,10 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.codec.digest.DigestUtils;
 
-/**
- *
- * @author Paula
- */
 public class ConfigurarCuenta extends HttpServlet {
 
     @Override

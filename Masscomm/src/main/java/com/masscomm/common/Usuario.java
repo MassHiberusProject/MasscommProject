@@ -8,10 +8,6 @@ package com.masscomm.common;
 import java.util.HashSet;
 import java.util.Set;
 
-/**
- *
- * @author pmayor
- */
 public class Usuario implements java.io.Serializable {
 
     private static final long serialVersionUID = 1L;

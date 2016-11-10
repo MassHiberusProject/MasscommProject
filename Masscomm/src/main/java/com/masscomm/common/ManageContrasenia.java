@@ -11,10 +11,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-/**
- *
- * @author pmayor
- */
 public class ManageContrasenia {
 
     public static int save(RecuerdoContrasenia contra) {

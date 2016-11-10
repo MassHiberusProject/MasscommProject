@@ -1,8 +1,3 @@
-<%-- 
-    Document   : editarUsuario
-    Created on : 28-sep-2016, 8:39:14
-    Author     : pmayor
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

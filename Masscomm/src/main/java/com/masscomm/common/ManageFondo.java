@@ -12,10 +12,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-/**
- *
- * @author claencina
- */
 public class ManageFondo {
     
     public static int save(Fondo fondo) {

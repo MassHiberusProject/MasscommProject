@@ -26,10 +26,9 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-/**
- *
- * @author claencina
- */
+/*
+Servlet en el cual se realiza las altas de nuevos cumpleaños
+*/
 public class AnadirCumpleanios extends HttpServlet {
 
     @Override
@@ -43,6 +42,9 @@ public class AnadirCumpleanios extends HttpServlet {
         rd.forward(request, response);
     }
 
+    /*
+    
+    */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
