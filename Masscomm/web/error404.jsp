@@ -2,7 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-    pageContext.setAttribute("mErr", "Usted no está autorizado para acceder a este recurso");
+    pageContext.setAttribute("mErr", "El recurso al que intenta acceder no existe");
 %>
 <!DOCTYPE html>
 <html>

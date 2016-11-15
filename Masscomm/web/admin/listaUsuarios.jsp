@@ -16,7 +16,7 @@
 
         <script src="${ctx}/JS/jquery-1.12.4.min.js"></script>
         <script src="${ctx}/JS/bootstrap.min.js"></script>
-        <script type="text/javascript" src="${ctx}/JS/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="${ctx}/JS/jquery.dataTables.min.js"></script>
         <script type="text/javascript">
             $(document).ready(function () {
                 $('#tables').DataTable({
@@ -62,11 +62,11 @@
             </div>
         </c:if>
         <c:if test="${msg !=null}">
-            <div class="alert alert-success col-sm-offset-2 col-sm-7" role="alert">
+            <div class="alert alert-success col-sm-offset-2 col-sm-8" role="alert">
                 <p><c:out value="${msg}"/></p>
             </div>
         </c:if>
-        <div id="listaUsuarios" class="table-responsive col-sm-offset-2 col-sm-7">
+        <div id="listaUsuarios" class="table-responsive col-sm-offset-2 col-sm-8">
             <table id="tables" class="table table-hover">
                 <thead>
                     <tr>

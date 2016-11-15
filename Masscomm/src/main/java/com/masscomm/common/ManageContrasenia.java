@@ -59,7 +59,7 @@ public class ManageContrasenia {
         int res = -1;
         try {
             tx = sess.beginTransaction();
-            res = sess.createSQLQuery("DELETE FROM RecuerdoContrasenia WHERE fecha < DATE_ADD(now(), INTERVAL '-5' MINUTE)").executeUpdate();
+            res = sess.createSQLQuery("DELETE FROM RecuerdoContrasenia WHERE fecha < DATE_ADD(now(), INTERVAL '-30' MINUTE)").executeUpdate();
             tx.commit();
         } catch (Exception e) {
             if (tx != null) {

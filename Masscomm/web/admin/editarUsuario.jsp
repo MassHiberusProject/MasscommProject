@@ -33,7 +33,7 @@
                         </div>
                     </c:when>
                     <c:otherwise>
-                        <c:if test="${errorpwd !=null || errormail !=null || errorname !=null || erroremail !=null || errorconf !=null}">
+                        <c:if test="${errorpwd !=null || errormail !=null || errorname !=null || erroremail !=null || errorconf !=null || errorrol !=null}">
                             <div class="row">
                                 <div class="alert alert-danger col-sm-offset-3 col-sm-6" role="alert">
                                     <ul>
@@ -51,6 +51,9 @@
                                             </c:if>
                                             <c:if test="${errorconf !=null}">
                                             <li><c:out value="${errorconf}"/></li>
+                                            </c:if>
+                                            <c:if test="${errorrol !=null}">
+                                            <li><c:out value="${errorrol}"/></li>
                                             </c:if>
                                     </ul>
                                 </div>

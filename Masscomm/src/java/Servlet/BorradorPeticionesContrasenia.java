@@ -31,7 +31,7 @@ public class BorradorPeticionesContrasenia implements ServletContextListener {
                      Logger.getLogger(BorradorPeticionesContrasenia.class.getName()).log(Level.SEVERE, "No se ha ejecutado el borrado de peticiones obsoletas");
                 }
             }
-        }, 0, 5, TimeUnit.MINUTES);
+        }, 0, 30, TimeUnit.MINUTES);
     }
 
     @Override

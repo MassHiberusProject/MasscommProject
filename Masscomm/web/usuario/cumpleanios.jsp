@@ -70,6 +70,13 @@
                     </div>
                 </div>
             </c:if>
+            <c:if test="${error !=null}">
+                <div class="row">
+                    <div class="alert alert-danger col-sm-offset-2 col-sm-8" role="alert">
+                        <p><c:out value="${error}"/></p>
+                    </div>
+                </div>
+            </c:if>
             <a class="btn btn-primary" href="AnadirCumpleanios" role="button" style="float: right">Nuevo cumpleaños</a>
             <br><br><br>
 
@@ -114,7 +121,7 @@
                         ${error_foto}
                     </div>  
                 </c:if>
-                <form enctype="multipart/form-data" class="form-horizontal" name="login" id="flogin" action="AnadirFondoVisita" method="post">
+                <form enctype="multipart/form-data" class="form-horizontal" name="login" id="flogin" action="AnadirFondo" method="post">
                     <div class="form-group">
                         <label for="inputFondo">Fondo</label>
                         <c:if test="${fondo!=null}">

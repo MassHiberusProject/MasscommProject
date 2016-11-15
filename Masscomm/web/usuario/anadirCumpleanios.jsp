@@ -27,6 +27,11 @@
         <script src="${ctx}/JS/bootstrap.min.js"></script>
         <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
         <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+        <script>
+            $(function () {
+                $("#fecha").datepicker({ dateFormat: 'yy-mm-dd' });
+            });
+        </script>
     </head>
     <body>
         <%@include file="navbarCumpleanios.html" %>
@@ -73,7 +78,7 @@
                     <div class="form-group">
                         <label for="inputFecha" class="col-sm-3 control-label">Fecha *</label>
                         <div class="col-sm-6">
-                            <input required="true" type="date" class="form-control" name="fecha" id="fecha" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${f}" />">                   
+                            <input required="true" type="text" class="form-control" name="fecha" id="fecha" value="<fmt:formatDate pattern="dd/MM/yyyy" value="${f}" />">                   
                         </div>
                     </div>
                     <div class="form-group">

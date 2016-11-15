@@ -27,6 +27,11 @@
                             <c:out value="${errorpeti}"/>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-offset-3 col-sm-2" role="alert">
+                            <a class="btn bg-primary" href="${ctx}/usuario/Inicio">Salir de aquí</a>
+                        </div>
+                    </div>
                 </c:when>
                 <c:otherwise>
                     <c:if test="${errorcoincide !=null || errorpwd !=null || errorconf !=null}">

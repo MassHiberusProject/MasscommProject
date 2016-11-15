@@ -70,6 +70,13 @@
                     </div>
                 </div>
             </c:if>
+            <c:if test="${error !=null}">
+                <div class="row">
+                    <div class="alert alert-danger col-sm-offset-2 col-sm-8" role="alert">
+                        <p><c:out value="${error}"/></p>
+                    </div>
+                </div>
+            </c:if>
             <a class="btn btn-primary" href="AnadirVisita" role="button" style="float: right">Nueva visita</a>
             <br><br><br>
 
