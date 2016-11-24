@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/usuario/Inicio"><img src="../img/masscomm-300x69.jpg" alt="Masscomm Logo" height="23" width="100"></a>
+        </div>
+
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="${pageContext.request.contextPath}/usuario/ListaCumpleanios">Cumpleaños</a></li>
+            <li><a href="${pageContext.request.contextPath}/usuario/ListaVisitas">Visitas</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <c:if test="${isAdmin}">
+                <li><a href="${pageContext.request.contextPath}/admin/ListaUsuarios">Administrar</a></li>
+            </c:if>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><c:out value="${username}"/> <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="${pageContext.request.contextPath}/usuario/ConfigurarCuenta">Configurar cuenta</a></li>
+                    <li><a href="${pageContext.request.contextPath}/CerrarSesion">Cerrar sesión</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
